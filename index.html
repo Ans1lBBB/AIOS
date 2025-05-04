@@ -3,261 +3,608 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Surfing2048 - 夏日冲浪女神2048拼图游戏">
+    <meta name="description" content="Surfing2048 - 夏日冲浪2048拼图游戏">
     <title>Surfing2048 | 冲浪女神2048</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Comic+Neue:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --main-blue: #00a8ff;
-            --sunset-orange: #ff6b6b;
-            --sand-yellow: #ffe08a;
-            --wave-blue: #4bc0c8;
-            --deep-blue: #487eb0;
+            --ocean-blue: #00a8ff;
+            --wave-teal: #4bc0c8;
+            --sunset-pink: #ff6b81;
+            --sand-gold: #fbc531;
+            --coral-red: #ff7f50;
+            --seafoam-green: #7bed9f;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, var(--main-blue) 0%, var(--wave-blue) 100%);
-            color: #fff;
+            background: linear-gradient(180deg, var(--ocean-blue) 0%, var(--wave-teal) 100%);
+            color: white;
             margin: 0;
             padding: 0;
             line-height: 1.6;
         }
 
         header {
-            background: linear-gradient(135deg, var(--sunset-orange) 0%, var(--sand-yellow) 100%);
-            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--sunset-pink) 0%, var(--sand-gold) 100%);
+            padding: 50px 20px 70px;
             text-align: center;
-            border-bottom: 6px solid var(--deep-blue);
+            border-bottom: 6px solid var(--coral-red);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
         }
 
         .logo {
-            font-family: 'Comic Neue', cursive;
-            font-size: 3em;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            font-family: 'Pacifico', cursive;
+            font-size: 3.5em;
+            font-weight: normal;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
             margin-bottom: 10px;
-            color: var(--deep-blue);
+            color: white;
+            letter-spacing: 1px;
         }
 
         .subtitle {
-            font-family: 'Comic Neue', cursive;
-            font-size: 1.2em;
-            color: #fff;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            font-family: 'Pacifico', cursive;
+            font-size: 1.5em;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
             margin-bottom: 20px;
         }
 
         .language-switcher {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px;
+            margin-top: 15px;
         }
 
         .language-switcher button {
-            background-color: rgba(255,255,255,0.2);
+            background-color: rgba(255,255,255,0.3);
             color: white;
             border: 2px solid white;
-            padding: 5px 15px;
-            border-radius: 20px;
+            padding: 6px 18px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 0.9em;
+            font-size: 1em;
             transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
         }
 
         .language-switcher button:hover {
             background-color: white;
-            color: var(--deep-blue);
+            color: var(--sunset-pink);
         }
 
         .container {
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
             max-width: 1000px;
             margin: 0 auto;
         }
 
         .content {
-            margin: 20px 0;
-            padding: 20px;
+            margin: 25px 0;
+            padding: 30px;
             background: rgba(255,255,255,0.9);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         }
 
         .content h2 {
-            color: var(--deep-blue);
-            font-size: 1.8em;
-            margin-bottom: 15px;
+            color: var(--ocean-blue);
+            font-size: 2em;
+            margin-bottom: 20px;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            font-family: 'Pacifico', cursive;
         }
 
         .content p {
-            font-size: 1em;
+            font-size: 1.1em;
             color: #333;
+            margin-bottom: 15px;
         }
 
-        /* 其他样式保持与原始结构相同，颜色替换为沙滩主题色 */
-
-        /* 新增沙滩元素 */
-        .beach-decoration {
-            position: absolute;
-            width: 100%;
-            height: 80px;
-            bottom: -10px;
-            left: 0;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 100 10" xmlns="http://www.w3.org/2000/svg"><path d="M0 8 Q25 5 50 8 T100 5 L100 10 L0 10 Z" fill="%23ffe08a"/></svg>');
-            background-size: 100% 100%;
+        .feature-list, .additional-features-list, .why-choose-us-list {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
-        .surfer-girl {
+        .feature-item, .additional-feature-item, .why-choose-item {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover, .additional-feature-item:hover, .why-choose-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .feature-item i, .additional-feature-item i, .why-choose-item i {
+            font-size: 2.8em;
+            color: var(--coral-red);
+            margin-bottom: 15px;
+        }
+
+        .feature-item h3, .additional-feature-item h3, .why-choose-item h3 {
+            color: var(--ocean-blue);
+            font-size: 1.4em;
+            margin-bottom: 12px;
+        }
+
+        /* 冲浪者动画图标 */
+        .surfer-icon {
             position: fixed;
-            top: 30px;
-            right: 10px;
             width: 80px;
-            height: auto;
+            height: 80px;
             z-index: 1000;
-            animation: float 3s ease-in-out infinite;
+            animation: surfAnimation 6s ease-in-out infinite;
+            opacity: 0.9;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        #surfer1 {
+            top: 100px;
+            right: 40px;
+            font-size: 4em;
+            color: var(--sand-gold);
+            animation-delay: 0s;
         }
-    </style>
 
-    <!-- 下载浮窗样式 -->
-    <style>
-        .surf-popup {
-            background: linear-gradient(135deg, var(--sunset-orange) 0%, var(--sand-yellow) 100%);
-            border-right: 4px solid var(--deep-blue);
+        #surfer2 {
+            top: 200px;
+            right: 60px;
+            font-size: 3.5em;
+            color: var(--seafoam-green);
+            animation-delay: 1s;
         }
-        .surf-popup h3 { color: var(--deep-blue); }
+
+        @keyframes surfAnimation {
+            0%, 100% { transform: translate(0, 0) rotate(-5deg); }
+            25% { transform: translate(-10px, -15px) rotate(5deg); }
+            50% { transform: translate(5px, -20px) rotate(-8deg); }
+            75% { transform: translate(-5px, -10px) rotate(3deg); }
+        }
+
+        /* 波浪装饰 */
+        .wave-decoration {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 120px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.2)" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            z-index: -1;
+        }
+
+        /* 游戏教程区块 */
+        .tutorial-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            text-align: left;
+            margin-top: 30px;
+        }
+
+        .tutorial-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .step-number {
+            background: var(--coral-red);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        /* 隐私政策按钮 */
+        .privacy-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, var(--sunset-pink) 0%, var(--coral-red) 100%);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .privacy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+        }
+
+        /* 右下角冲浪板下载按钮 */
+        .surf-board {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 200px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--sunset-pink) 0%, var(--sand-gold) 100%);
+            border-radius: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .surf-board:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        .surf-board i {
+            margin-right: 12px;
+            font-size: 1.8em;
+        }
+
+        .surf-board::after {
+            content: "";
+            position: absolute;
+            top: -15px;
+            left: 20%;
+            width: 60%;
+            height: 30px;
+            background: rgba(255,255,255,0.3);
+            transform: rotate(-5deg);
+            border-radius: 50%;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .logo { font-size: 2.5em; }
+            .subtitle { font-size: 1.2em; }
+            .surfer-icon { display: none; }
+            .surf-board { width: 180px; height: 60px; bottom: 20px; right: 20px; }
+        }
     </style>
 </head>
 <body>
+    <!-- 冲浪者动画图标 -->
+    <i class="fas fa-surfing surfer-icon" id="surfer1"></i>
+    <i class="fas fa-swimmer surfer-icon" id="surfer2"></i>
+    <div class="wave-decoration"></div>
 
-<header>
-    <img src="surfer-girl.png" alt="Surfing Goddess" class="surfer-girl">
-    <div class="beach-decoration"></div>
-    <div class="logo" id="app-title">Surfing2048</div>
-    <p class="subtitle" id="subtitle">Meet the Surfing Goddess!</p>
-    <div class="language-switcher">
-        <button onclick="switchLanguage('en')">EN</button>
-        <button onclick="switchLanguage('zh')">简体中文</button>
-        <button onclick="switchLanguage('zh_tw')">繁體中文</button>
-        <button onclick="switchLanguage('ja')">日本語</button>
-        <button onclick="switchLanguage('ko')">한국어</button>
-    </div>
-</header>
+    <header>
+        <div class="logo" id="app-title">Surfing2048</div>
+        <p class="subtitle" id="subtitle">Ride the Waves of Fun!</p>
+        <div class="language-switcher">
+            <button onclick="switchLanguage('en')">EN</button>
+            <button onclick="switchLanguage('zh')">简体中文</button>
+            <button onclick="switchLanguage('zh_tw')">繁體中文</button>
+            <button onclick="switchLanguage('ja')">日本語</button>
+            <button onclick="switchLanguage('ko')">한국어</button>
+        </div>
+    </header>
 
-<div class="container">
-    <!-- 游戏描述 -->
-    <div class="content" id="description">
-        <h2 id="welcome-title">🏄♀️ 立即獲取衝浪女神Mia卡！</h2>
-        <p id="main-description">完成遊戲即可解鎖精美CG插圖卡牌，收集屬於你的沙灘女神！</p>
-        <a href="https://apps.apple.com/app/id6745104101" class="download-button">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
-                 alt="Download on the App Store"
-                 style="height: 50px; margin: 20px 0;">
-        </a>
-    </div>
+    <div class="container">
+        <!-- 游戏描述 -->
+        <div class="content" id="description">
+            <h2 id="welcome-title">🏄♀️ Limited Time Offer!</h2>
+            <p id="main-description">Download now and get the exclusive Surf Goddess Mia card for FREE! Join the summer adventure and collect unique surfers as you conquer the waves in this exciting 2048 puzzle game!</p>
+            <a href="https://apps.apple.com/app/id6745104101" class="download-button">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
+                     alt="Download on the App Store"
+                     style="height: 60px; margin: 20px 0;">
+            </a>
+        </div>
 
-    <!-- 游戏特色 -->
-    <div class="content" id="features">
-        <h2 id="features-title">遊戲特色</h2>
-        <div class="feature-list">
-            <!-- 保持原有结构，替换图标和内容 -->
-            <div class="feature-item">
-                <i class="fas fa-sun magic-icon"></i>
-                <h3>夏日主題升級</h3>
-                <p>清爽沙灘風格搭配動感海浪特效</p>
+        <!-- 游戏特色 -->
+        <div class="content" id="features">
+            <h2 id="features-title">Why You'll Love It</h2>
+            <div class="feature-list">
+                <div class="feature-item">
+                    <i class="fas fa-water"></i>
+                    <h3 id="feature1-title">Ocean-Themed 2048</h3>
+                    <p id="feature1-desc">Classic 2048 gameplay with a refreshing beach twist. Slide tiles to merge numbers while enjoying beautiful wave animations.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-star"></i>
+                    <h3 id="feature2-title">Collect Surfers</h3>
+                    <p id="feature2-desc">Unlock unique surfers with each achievement. Each has special animations and beach styles to discover.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-umbrella-beach"></i>
+                    <h3 id="feature3-title">Summer Vibes</h3>
+                    <p id="feature3-desc">Vibrant beach visuals and relaxing wave sounds create the perfect summer gaming atmosphere.</p>
+                </div>
+                <div class="feature-item">
+                    <i class="fas fa-trophy"></i>
+                    <h3 id="feature4-title">Daily Challenges</h3>
+                    <p id="feature4-desc">Special daily puzzles with bonus rewards to keep the summer fun going all season long.</p>
+                </div>
             </div>
-            <div class="feature-item">
-                <i class="fas fa-surfing"></i>
-                <h3>卡牌收集系統</h3>
-                <p>解鎖12位不同風格的衝浪女神</p>
+        </div>
+
+        <!-- 游戏教程 -->
+        <div class="content" id="tutorial">
+            <h2 id="tutorial-title">How to Play Surfing2048</h2>
+            <div class="tutorial-steps">
+                <div class="tutorial-step">
+                    <div class="step-number">1</div>
+                    <p id="step1">Swipe in any direction to move all tiles. Tiles with the same number will merge when they collide.</p>
+                </div>
+                <div class="tutorial-step">
+                    <div class="step-number">2</div>
+                    <p id="step2">After each move, a new tile (either 2 or 4) appears in a random empty spot.</p>
+                </div>
+                <div class="tutorial-step">
+                    <div class="step-number">3</div>
+                    <p id="step3">Merge tiles to create higher numbers. Reach the 2048 tile to complete the basic challenge!</p>
+                </div>
+                <div class="tutorial-step">
+                    <div class="step-number">4</div>
+                    <p id="step4">Special beach tiles appear at higher levels - merge them for bonus points and to unlock surfers.</p>
+                </div>
             </div>
-            <!-- 其他功能项... -->
+        </div>
+
+        <!-- 高级功能 -->
+        <div class="content" id="advanced-features">
+            <h2 id="advanced-title">Premium Features</h2>
+            <div class="additional-features-list">
+                <div class="additional-feature-item">
+                    <i class="fas fa-moon"></i>
+                    <h3 id="adv1-title">Night Beach Mode</h3>
+                    <p id="adv1-desc">Switch to beautiful moonlit beach scenes for evening gaming sessions.</p>
+                </div>
+                <div class="additional-feature-item">
+                    <i class="fas fa-music"></i>
+                    <h3 id="adv2-title">Exclusive Soundtrack</h3>
+                    <p id="adv2-desc">Relaxing beach waves and summer tunes to enhance your experience.</p>
+                </div>
+                <div class="additional-feature-item">
+                    <i class="fas fa-chart-line"></i>
+                    <h3 id="adv3-title">Advanced Stats</h3>
+                    <p id="adv3-desc">Track your progress with detailed statistics and achievement records.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 隐私政策 -->
+        <div class="content" id="privacy" style="text-align: center;">
+            <h2><i class="fas fa-shield-alt"></i> <span id="privacy-title">Your Privacy Matters</span></h2>
+            <p id="privacy-desc">We care about your data security. Read how we protect your information.</p>
+            <a href="https://ans1lbbb.github.io/Surfing2048/privacy.html" class="privacy-btn" id="privacy-btn" target="_blank">Privacy Policy</a>
         </div>
     </div>
 
-    <!-- 隐私政策 -->
-    <div class="content" id="privacy">
-        <h2><i class="fas fa-shield-alt"></i> 隱私權政策</h2>
-        <div class="policy-links">
-            <a href="https://ans1lbbb.github.io/Surfing2048/privacy.html" target="_blank">查看完整隐私政策</a>
-        </div>
+    <footer>
+        <p>© 2024 Surfing2048 | All Rights Reserved</p>
+    </footer>
+
+    <!-- 右下角冲浪板下载按钮 -->
+    <div class="surf-board" onclick="window.open('https://apps.apple.com/app/id6745104101')">
+        <i class="fas fa-download"></i>
+        <span id="download-text">Download Now</span>
     </div>
-</div>
 
-<footer>
-    <p>© 2024 Surfing2048 | All Rights Reserved</p>
-</footer>
+    <script>
+        // 完整多语言支持
+        const translations = {
+            en: {
+                appTitle: "Surfing2048",
+                subtitle: "Ride the Waves of Fun!",
+                welcomeTitle: "🏄♀️ Limited Time Offer!",
+                mainDescription: "Download now and get the exclusive Surf Goddess Mia card for FREE! Join the summer adventure and collect unique surfers as you conquer the waves in this exciting 2048 puzzle game!",
+                featuresTitle: "Why You'll Love It",
+                feature1Title: "Ocean-Themed 2048",
+                feature1Desc: "Classic 2048 gameplay with a refreshing beach twist. Slide tiles to merge numbers while enjoying beautiful wave animations.",
+                feature2Title: "Collect Surfers",
+                feature2Desc: "Unlock unique surfers with each achievement. Each has special animations and beach styles to discover.",
+                feature3Title: "Summer Vibes",
+                feature3Desc: "Vibrant beach visuals and relaxing wave sounds create the perfect summer gaming atmosphere.",
+                feature4Title: "Daily Challenges",
+                feature4Desc: "Special daily puzzles with bonus rewards to keep the summer fun going all season long.",
+                tutorialTitle: "How to Play Surfing2048",
+                step1: "Swipe in any direction to move all tiles. Tiles with the same number will merge when they collide.",
+                step2: "After each move, a new tile (either 2 or 4) appears in a random empty spot.",
+                step3: "Merge tiles to create higher numbers. Reach the 2048 tile to complete the basic challenge!",
+                step4: "Special beach tiles appear at higher levels - merge them for bonus points and to unlock surfers.",
+                advancedTitle: "Premium Features",
+                adv1Title: "Night Beach Mode",
+                adv1Desc: "Switch to beautiful moonlit beach scenes for evening gaming sessions.",
+                adv2Title: "Exclusive Soundtrack",
+                adv2Desc: "Relaxing beach waves and summer tunes to enhance your experience.",
+                adv3Title: "Advanced Stats",
+                adv3Desc: "Track your progress with detailed statistics and achievement records.",
+                privacyTitle: "Your Privacy Matters",
+                privacyDesc: "We care about your data security. Read how we protect your information.",
+                privacyBtn: "Privacy Policy",
+                downloadText: "Download Now"
+            },
+            zh: {
+                appTitle: "冲浪女神2048",
+                subtitle: "享受冲浪乐趣！",
+                welcomeTitle: "🏄♀️ 限时优惠！",
+                mainDescription: "立即下载即可免费获得专属冲浪女神Mia卡！加入夏日冒险，在这款激动人心的2048拼图游戏中征服海浪，收集独特的冲浪者！",
+                featuresTitle: "游戏特色",
+                feature1Title: "海洋主题2048",
+                feature1Desc: "经典2048玩法搭配清爽海滩风格。滑动方块合并数字，同时欣赏美丽的海浪动画。",
+                feature2Title: "收集冲浪者",
+                feature2Desc: "每次成就解锁独特的冲浪者。每位都有特殊动画和海滩风格等待发现。",
+                feature3Title: "夏日氛围",
+                feature3Desc: "充满活力的海滩视觉效果和轻松的海浪声营造完美的夏日游戏氛围。",
+                feature4Title: "每日挑战",
+                feature4Desc: "特别的每日谜题和额外奖励，让夏日乐趣持续整个季节。",
+                tutorialTitle: "游戏玩法",
+                step1: "向任意方向滑动移动所有方块。相同数字的方块碰撞时会合并。",
+                step2: "每次移动后，一个新的方块(2或4)会出现在随机空格中。",
+                step3: "合并方块创造更高数字。达到2048方块完成基本挑战！",
+                step4: "高级关卡会出现特殊海滩方块 - 合并它们可获得奖励分数并解锁冲浪者。",
+                advancedTitle: "高级功能",
+                adv1Title: "夜间海滩模式",
+                adv1Desc: "切换到美丽的月光海滩场景，享受夜间游戏时光。",
+                adv2Title: "专属音效",
+                adv2Desc: "轻松的海浪声和夏日旋律增强您的游戏体验。",
+                adv3Title: "高级统计",
+                adv3Desc: "通过详细的统计数据和成就记录追踪您的进度。",
+                privacyTitle: "隐私保护",
+                privacyDesc: "我们重视您的数据安全。了解我们如何保护您的信息。",
+                privacyBtn: "隐私政策",
+                downloadText: "立即下载"
+            },
+            zh_tw: {
+                appTitle: "衝浪女神2048",
+                subtitle: "享受衝浪樂趣！",
+                welcomeTitle: "🏄♀️ 限時優惠！",
+                mainDescription: "立即下載即可免費獲得專屬衝浪女神Mia卡！加入夏日冒險，在這款激動人心的2048拼圖遊戲中征服海浪，收集獨特的衝浪者！",
+                featuresTitle: "遊戲特色",
+                feature1Title: "海洋主題2048",
+                feature1Desc: "經典2048玩法搭配清爽海灘風格。滑動方塊合併數字，同時欣賞美麗的海浪動畫。",
+                feature2Title: "收集衝浪者",
+                feature2Desc: "每次成就解鎖獨特的衝浪者。每位都有特殊動畫和海灘風格等待發現。",
+                feature3Title: "夏日氛圍",
+                feature3Desc: "充滿活力的海灘視覺效果和輕鬆的海浪聲營造完美的夏日遊戲氛圍。",
+                feature4Title: "每日挑戰",
+                feature4Desc: "特別的每日謎題和額外獎勵，讓夏日樂趣持續整個季節。",
+                tutorialTitle: "遊戲玩法",
+                step1: "向任意方向滑動移動所有方塊。相同數字的方塊碰撞時會合併。",
+                step2: "每次移動後，一個新的方塊(2或4)會出現在隨機空格中。",
+                step3: "合併方塊創造更高數字。達到2048方塊完成基本挑戰！",
+                step4: "高級關卡會出現特殊海灘方塊 - 合併它們可獲得獎勵分數並解鎖衝浪者。",
+                advancedTitle: "高級功能",
+                adv1Title: "夜間海灘模式",
+                adv1Desc: "切換到美麗的月光海灘場景，享受夜間遊戲時光。",
+                adv2Title: "專屬音效",
+                adv2Desc: "輕鬆的海浪聲和夏日旋律增強您的遊戲體驗。",
+                adv3Title: "高級統計",
+                adv3Desc: "通過詳細的統計數據和成就記錄追蹤您的進度。",
+                privacyTitle: "隱私保護",
+                privacyDesc: "我們重視您的數據安全。了解我們如何保護您的信息。",
+                privacyBtn: "隱私政策",
+                downloadText: "立即下載"
+            },
+            ja: {
+                appTitle: "Surfing2048",
+                subtitle: "波乗りの楽しみ！",
+                welcomeTitle: "🏄♀️ 期間限定オファー！",
+                mainDescription: "今すぐダウンロードすると、限定サーフィン女神Miaカードが無料で手に入ります！このエキサイティングな2048パズルゲームで波を乗りこなし、ユニークなサーファーを集める夏の冒険に参加しましょう！",
+                featuresTitle: "ゲームの特徴",
+                feature1Title: "海をテーマにした2048",
+                feature1Desc: "爽やかなビーチスタイルのクラシック2048ゲームプレイ。美しい波のアニメーションを楽しみながら、数字をスライドさせて結合させます。",
+                feature2Title: "サーファーを集める",
+                feature2Desc: "達成するごとにユニークなサーファーをアンロック。それぞれに特別なアニメーションとビーチスタイルがあります。",
+                feature3Title: "夏の雰囲気",
+                feature3Desc: "鮮やかなビーチのビジュアルとリラックスできる波の音が、完璧な夏のゲーム雰囲気を作り出します。",
+                feature4Title: "デイリーチャレンジ",
+                feature4Desc: "特別な日替わりパズルとボーナス報酬で、夏の楽しみがシーズン中続きます。",
+                tutorialTitle: "遊び方",
+                step1: "任意の方向にスワイプしてすべてのタイルを移動します。同じ数字のタイルが衝突すると結合します。",
+                step2: "各移動後、新しいタイル(2または4)がランダムな空きスペースに表示されます。",
+                step3: "タイルを結合してより高い数字を作ります。2048タイルに到達して基本的なチャレンジを完了しましょう！",
+                step4: "より高いレベルでは特別なビーチタイルが表示されます - それらを結合してボーナスポイントを獲得し、サーファーをアンロックします。",
+                advancedTitle: "プレミアム機能",
+                adv1Title: "ナイトビーチモード",
+                adv1Desc: "美しい月明かりのビーチシーンに切り替えて、夜のゲームセッションを楽しめます。",
+                adv2Title: "限定サウンドトラック",
+                adv2Desc: "リラックスできる波の音と夏のメロディーが体験を向上させます。",
+                adv3Title: "高度な統計",
+                adv3Desc: "詳細な統計データと実績記録で進捗状況を追跡します。",
+                privacyTitle: "プライバシー保護",
+                privacyDesc: "私たちはあなたのデータセキュリティを重視しています。情報保護の方法をご確認ください。",
+                privacyBtn: "プライバシーポリシー",
+                downloadText: "今すぐダウンロード"
+            },
+            ko: {
+                appTitle: "Surfing2048",
+                subtitle: "서핑의 즐거움을 느껴보세요!",
+                welcomeTitle: "🏄♀️ 한정 기간 제공!",
+                mainDescription: "지금 다운로드하면 독점 서프 여신 Mia 카드를 무료로 받을 수 있습니다! 이 흥미진진한 2048 퍼즐 게임에서 파도를 정복하고 독특한 서퍼들을 수집하는 여름 모험에 참여하세요!",
+                featuresTitle: "게임 특징",
+                feature1Title: "바다 테마의 2048",
+                feature1Desc: "상쾌한 해변 스타일의 클래식 2048 게임플레이. 아름다운 파도 애니메이션을 즐기면서 숫자를 슬라이드하여 합칩니다.",
+                feature2Title: "서퍼 수집",
+                feature2Desc: "각 업적 달성 시 독특한 서퍼를 잠금 해제. 각각 특별한 애니메이션과 해변 스타일이 있습니다.",
+                feature3Title: "여름 분위기",
+                feature3Desc: "생동감 넘치는 해변 비주얼과 편안한 파도 소리가 완벽한 여름 게임 분위기를 조성합니다.",
+                feature4Title: "일일 도전",
+                feature4Desc: "특별한 일일 퍼즐과 보너스 보상으로 여름 즐거움을 계속 유지하세요.",
+                tutorialTitle: "게임 방법",
+                step1: "아무 방향으로나 스와이프하여 모든 타일을 이동합니다. 같은 숫자의 타일이 충돌하면 합쳐집니다.",
+                step2: "각 이동 후, 새로운 타일(2 또는 4)이 무작위 빈 공간에 나타납니다.",
+                step3: "타일을 합쳐 더 높은 숫자를 만듭니다. 2048 타일에 도달하여 기본 도전을 완료하세요!",
+                step4: "더 높은 레벨에서는 특별한 해변 타일이 나타납니다 - 이를 합쳐 보너스 포인트를 얻고 서퍼를 잠금 해제하세요.",
+                advancedTitle: "프리미엄 기능",
+                adv1Title: "밤 해변 모드",
+                adv1Desc: "아름다운 달빛 해변 장면으로 전환하여 저녁 게임 세션을 즐기세요.",
+                adv2Title: "독점 사운드트랙",
+                adv2Desc: "편안한 파도 소리와 여름 멜로디가 경험을 향상시킵니다.",
+                adv3Title: "고급 통계",
+                adv3Desc: "상세한 통계 데이터와 업적 기록으로 진행 상황을 추적합니다.",
+                privacyTitle: "개인정보 보호",
+                privacyDesc: "우리는 귀하의 데이터 보안을 중요하게 생각합니다. 정보 보호 방법을 확인하세요.",
+                privacyBtn: "개인정보 보호정책",
+                downloadText: "지금 다운로드"
+            }
+        };
 
-<script>
-    // 多语言配置
-    const translations = {
-        en: {
-            appTitle: "Surfing2048",
-            subtitle: "Meet the Surfing Goddess!",
-            welcomeTitle: "🏄♀️ Get Surf Goddess Mia Card NOW!",
-            featuresTitle: "Game Features",
-            // 其他翻译内容...
-        },
-        zh: {
-            appTitle: "冲浪女神2048",
-            subtitle: "邂逅你的冲浪女神！"
-            // 简体中文翻译...
-        },
-        zh_tw: {
-            appTitle: "衝浪女神2048",
-            subtitle: "邂逅你的衝浪女神！"
-            // 繁体中文翻译...
-        },
-        ja: {
-            appTitle: "Surfing2048",
-            subtitle: "サーフィン女神と出会おう！"
-            // 日文翻译...
-        },
-        ko: {
-            appTitle: "Surfing2048",
-            subtitle: "서핑 여신을 만나보세요!"
-            // 韩文翻译...
+        function switchLanguage(lang) {
+            const data = translations[lang];
+            if (!data) return;
+            
+            // 更新所有文本元素
+            document.getElementById('app-title').textContent = data.appTitle;
+            document.getElementById('subtitle').textContent = data.subtitle;
+            document.getElementById('welcome-title').textContent = data.welcomeTitle;
+            document.getElementById('main-description').textContent = data.mainDescription;
+            document.getElementById('features-title').textContent = data.featuresTitle;
+            document.getElementById('feature1-title').textContent = data.feature1Title;
+            document.getElementById('feature1-desc').textContent = data.feature1Desc;
+            document.getElementById('feature2-title').textContent = data.feature2Title;
+            document.getElementById('feature2-desc').textContent = data.feature2Desc;
+            document.getElementById('feature3-title').textContent = data.feature3Title;
+            document.getElementById('feature3-desc').textContent = data.feature3Desc;
+            document.getElementById('feature4-title').textContent = data.feature4Title;
+            document.getElementById('feature4-desc').textContent = data.feature4Desc;
+            document.getElementById('tutorial-title').textContent = data.tutorialTitle;
+            document.getElementById('step1').textContent = data.step1;
+            document.getElementById('step2').textContent = data.step2;
+            document.getElementById('step3').textContent = data.step3;
+            document.getElementById('step4').textContent = data.step4;
+            document.getElementById('advanced-title').textContent = data.advancedTitle;
+            document.getElementById('adv1-title').textContent = data.adv1Title;
+            document.getElementById('adv1-desc').textContent = data.adv1Desc;
+            document.getElementById('adv2-title').textContent = data.adv2Title;
+            document.getElementById('adv2-desc').textContent = data.adv2Desc;
+            document.getElementById('adv3-title').textContent = data.adv3Title;
+            document.getElementById('adv3-desc').textContent = data.adv3Desc;
+            document.getElementById('privacy-title').textContent = data.privacyTitle;
+            document.getElementById('privacy-desc').textContent = data.privacyDesc;
+            document.getElementById('privacy-btn').textContent = data.privacyBtn;
+            document.getElementById('download-text').textContent = data.downloadText;
         }
-    };
 
-    function switchLanguage(lang) {
-        const data = translations[lang];
-        document.getElementById('app-title').textContent = data.appTitle;
-        document.getElementById('subtitle').textContent = data.subtitle;
-        // 更新其他元素...
-    }
-    
-    // 保持原有功能逻辑...
-</script>
-
-<!-- 下载浮窗 -->
-<div class="magic-bookmark">
-  <div class="bookmark-tab" onclick="toggleBookmark()">
-    <i class="fas fa-surfing"></i>
-  </div>
-  <div class="bookmark-content surf-popup">
-    <h3 id="download-title">立即衝浪！</h3>
-    <p id="download-subtitle">獲取你的專屬女神卡</p>
-    <a href="https://apps.apple.com/app/id6745104101" class="app-download-link">
-        <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
-             alt="App Store下載"
-             style="height: 40px;">
-    </a>
-  </div>
-</div>
-
+        // 初始化默认语言
+        document.addEventListener('DOMContentLoaded', () => {
+            switchLanguage('en');
+        });
+    </script>
 </body>
 </html>
