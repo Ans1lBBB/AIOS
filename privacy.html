@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surfing2048 Privacy Protection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #38A3D1;
+            --secondary: #FFD700;
+            --accent: #FF6B6B;
+            --wave: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M0 70L50 66.7C100 63 200 57 300 45.7C400 35 500 20 600 20C700 20 800 35 900 45.7C1000 57 1100 63 1150 66.7L1200 70V0H1150C1100 0 1000 0 900 0C800 0 700 0 600 0C500 0 400 0 300 0C200 0 100 0 50 0H0Z" fill="%2338A3D1"/></svg>');
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background: linear-gradient(180deg, #E6F4F7 0%, #FFFFFF 100%);
+            color: #2C3E50;
+            padding-bottom: 100px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 40px 0 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: var(--wave);
+            background-size: cover;
+        }
+
+        .logo-text {
+            font-family: 'Pacifico', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            text-shadow: 2px 2px 0px rgba(255,215,0,0.3);
+            margin: 20px 0;
+            position: relative;
+        }
+
+        .logo-text::after {
+            content: '🏄♀️';
+            position: absolute;
+            right: -40px;
+            top: -10px;
+            font-size: 2rem;
+            transform: rotate(15deg);
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: #38A3D1;
+            margin-top: -10px;
+            letter-spacing: 1px;
+        }
+
+        .effective-date {
+            color: #7F8C8D;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .policy-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .policy-section {
+            background: rgba(255,255,255,0.9);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: 0 8px 20px rgba(56,163,209,0.1);
+            border: 2px solid rgba(56,163,209,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .policy-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(56,163,209,0.15);
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin: 0 0 25px;
+            position: relative;
+            padding-left: 40px;
+        }
+
+        h2 i {
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        p {
+            font-size: 1rem;
+            color: #34495E;
+            line-height: 1.8;
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .highlight {
+            display: block;
+            background: linear-gradient(135deg, var(--primary), #4EC3F7);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 30px;
+            margin: 25px auto;
+            width: fit-content;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(56,163,209,0.3);
+        }
+
+        .language-toggle {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .language-toggle button {
+            padding: 12px 25px;
+            border: 2px solid var(--primary);
+            border-radius: 30px;
+            background: white;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            margin: 8px;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .language-toggle button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(56,163,209,0.1));
+            transition: 0.3s;
+        }
+
+        .language-toggle button:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .language-toggle button:hover::before {
+            left: 100%;
+        }
+
+        .contact-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, var(--primary), #4EC3F7);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(56,163,209,0.3);
+        }
+
+        .contact-button i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(56,163,209,0.4);
+            background: linear-gradient(135deg, #4EC3F7, var(--primary));
+        }
+
+        /* 衝浪板導航 */
+        .surf-nav {
+            position: fixed;
+            bottom: 30px;
+            right: -200px;
+            z-index: 1000;
+            transition: right 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .surf-nav.active {
+            right: 0;
+        }
+
+        .surf-trigger {
+            position: absolute;
+            left: -60px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            border-radius: 15px 0 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            box-shadow: -5px 5px 15px rgba(56,163,209,0.3);
+            transition: 0.3s;
+        }
+
+        .surf-trigger:hover {
+            transform: rotate(-10deg) scale(1.1);
+        }
+
+        .surf-panel {
+            background: white;
+            border-radius: 20px 0 0 20px;
+            padding: 20px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 200px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 20px;
+            border-radius: 15px;
+            background: rgba(56,163,209,0.05);
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .nav-link i {
+            width: 25px;
+            font-size: 1.2rem;
+            color: var(--secondary);
+        }
+
+        .nav-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateX(-10px);
+        }
+
+        .nav-link:hover i {
+            color: white;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            color: #7F8C8D;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        @media (max-width: 768px) {
+            .logo-text {
+                font-size: 2.2rem;
+            }
+            .surf-nav {
+                bottom: 20px;
+                right: -180px;
+            }
+            .surf-panel {
+                width: 180px;
+            }
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(10deg); }
+            50% { transform: rotate(-5deg); }
+            75% { transform: rotate(5deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        .surf-trigger i {
+            animation: wave 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-text">Surfing2048</div>
+        <div class="header-subtitle" id="header-subtitle">Ride the Waves of Privacy</div>
+        <p class="effective-date" id="effective-date">Effective Date: July 15, 2024</p>
+    </div>
+
+    <div class="language-toggle">
+        <button onclick="switchLanguage('en')"><i class="fas fa-sun"></i> English</button>
+        <button onclick="switchLanguage('zh_tw')"><i class="fas fa-umbrella-beach"></i> 繁體中文</button>
+        <button onclick="switchLanguage('zh')"><i class="fas fa-water"></i> 简体中文</button>
+        <button onclick="switchLanguage('ja')"><i class="fas fa-fish"></i> 日本語</button>
+        <button onclick="switchLanguage('ko')"><i class="fas fa-anchor"></i> 한국어</button>
+    </div>
+
+    <div class="policy-container">
+        <!-- Data Protection -->
+        <div class="policy-section">
+            <h2 id="dataProtection-title"><i class="fas fa-shield-alt"></i> Data Protection Commitment</h2>
+            <p id="dataProtection-text">Surfing2048 is your most trusted surfing companion on the digital waves～</p>
+            <p id="dataProtection-list"></p>
+            <span class="highlight" id="dataProtection-highlight">We promise:</span>
+        </div>
+
+        <!-- Anonymous Data -->
+        <div class="policy-section">
+            <h2 id="anonymousData-title"><i class="fas fa-user-secret"></i> Anonymous Data Processing</h2>
+            <p id="anonymousData-text"></p>
+            <span class="highlight" id="anonymousData-highlight">All data rides the waves anonymously!</span>
+        </div>
+
+        <!-- Advertising Services -->
+        <div class="policy-section">
+            <h2 id="advertising-title"><i class="fas fa-ad"></i> Advertising Services</h2>
+            <p id="advertising-text"></p>
+            <span class="highlight" id="advertising-highlight">Check the tides of third-party policies</span>
+        </div>
+
+        <!-- Data Security -->
+        <div class="policy-section">
+            <h2 id="security-title"><i class="fas fa-lock"></i> Security Measures</h2>
+            <p id="security-text"></p>
+            <span class="highlight" id="security-highlight">Your data is safe in our surf shack!</span>
+        </div>
+
+        <!-- Children's Privacy -->
+        <div class="policy-section">
+            <h2 id="childrenPrivacy-title"><i class="fas fa-child"></i> Children's Privacy</h2>
+            <p id="childrenPrivacy-text"></p>
+            <span class="highlight" id="childrenPrivacy-highlight">We protect little surfers!</span>
+        </div>
+
+        <!-- Policy Updates -->
+        <div class="policy-section">
+            <h2 id="policyUpdates-title"><i class="fas fa-sync-alt"></i> Policy Updates</h2>
+            <p id="policyUpdates-text"></p>
+            <span class="highlight" id="policyUpdates-highlight">Stay tuned to the changing tides!</span>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="policy-section" style="text-align: center; background: rgba(56,163,209,0.05);">
+            <h2 id="contact-title"><i class="fas fa-life-ring"></i> Need Help? Call the Surf Rescue!</h2>
+            <p style="margin: 20px 0;">
+                <a href="mailto:support@surfing2048.com" class="contact-button" id="contact-button"><i class="fas fa-envelope"></i> Send a Message in a Bottle</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="footer" id="footer">
+        © 2024 Surfing2048. Catch the Perfect Wave!
+    </div>
+
+    <!-- 衝浪導航面板 -->
+    <div class="surf-nav">
+        <div class="surf-trigger" onclick="toggleSurfNav()">
+            <i class="fas fa-surfing"></i>
+        </div>
+        <div class="surf-panel">
+            <a href="https://surfing2048.com" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span id="magic-home-text">Official Site</span>
+            </a>
+            <a href="https://download.surfing2048.com" class="nav-link">
+                <i class="fas fa-download"></i>
+                <span id="magic-download-text">Download App</span>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                pageTitle: "Surfing2048 Privacy Protection",
+                headerSubtitle: "Ride the Waves of Privacy",
+                effectiveDate: "Effective Date: July 15, 2024",
+                dataProtection: {
+                    title: "🛡️ Data Protection Commitment",
+                    text: "Surfing2048 is your most trusted surfing companion on the digital waves～",
+                    highlight: "We promise:",
+                    list: ["🏄♀️ No collection of personal information", "🌊 No registration required", "🐚 All data stored locally in our surf shack"]
+                },
+                anonymousData: {
+                    title: "🕶️ Anonymous Data Processing",
+                    text: ["We only collect:", "📊 Wave riding statistics", "🔍 Beach interaction patterns"],
+                    highlight: "All data rides the waves anonymously!"
+                },
+                advertising: {
+                    title: "📺 Advertising Services",
+                    text: ["The app may include:", "🏖️ Surf-related ads", "🤝 Third-party beach vendors", "⚠️ Redirects to external surf shops"],
+                    highlight: "Check the tides of third-party policies"
+                },
+                security: {
+                    title: "🔐 Security Measures",
+                    text: ["We use:", "🏄♀️ Wave encryption technology", "🦈 Shark-proof firewalls", "🏝️ Local beach storage"],
+                    highlight: "Your data is safe in our surf shack!"
+                },
+                childrenPrivacy: {
+                    title: "👧🏻👦🏼 Children's Privacy",
+                    text: ["Special measures:", "🚫 No data from little surfers under 13", "🧹 Beach cleanup filters", "🏖️ Safe for all ages"],
+                    highlight: "We protect little surfers!"
+                },
+                policyUpdates: {
+                    title: "🔄 Policy Updates",
+                    text: ["When updating, you'll see:", "📆 New tide schedules", "💡 Important surf advisories", "🔔 Beach notifications"],
+                    highlight: "Stay tuned to the changing tides!"
+                },
+                contact: {
+                    title: "🛟 Need Help? Call the Surf Rescue!",
+                    button: "📮 Send a Message in a Bottle"
+                },
+                magicNav: {
+                    homeText: "Official Site",
+                    downloadText: "Download App"
+                },
+                footer: "© 2024 Surfing2048. Catch the Perfect Wave!"
+            },
+            zh_tw: {
+                pageTitle: "Surfing2048 隱私保護手冊",
+                headerSubtitle: "乘風破浪保護您的隱私",
+                effectiveDate: "生效日期：2024年7月15日",
+                dataProtection: {
+                    title: "🛡️ 數據保護承諾",
+                    text: "Surfing2048 是您在數位海洋中最值得信賴的衝浪夥伴～",
+                    highlight: "我們承諾：",
+                    list: ["🏄♀️ 不收集個人信息", "🌊 無需註冊", "🐚 所有數據存儲在本地衝浪小屋"]
+                },
+                anonymousData: {
+                    title: "🕶️ 匿名數據處理",
+                    text: ["我們僅收集：", "📊 衝浪統計數據", "🔍 海灘互動模式"],
+                    highlight: "所有數據都乘風破浪匿名航行！"
+                },
+                advertising: {
+                    title: "📺 廣告服務",
+                    text: ["應用可能包含：", "🏖️ 衝浪相關廣告", "🤝 第三方海灘供應商", "⚠️ 跳轉至外部衝浪商店"],
+                    highlight: "請查看第三方潮汐政策"
+                },
+                security: {
+                    title: "🔐 安全措施",
+                    text: ["我們採用：", "🏄♀️ 波浪加密技術", "🦈 防鯊魚防火牆", "🏝️ 本地海灘存儲"],
+                    highlight: "您的數據在我們的衝浪小屋很安全！"
+                },
+                childrenPrivacy: {
+                    title: "👧🏻👦🏼 兒童隱私",
+                    text: ["特別措施：", "🚫 不收集13歲以下小衝浪者數據", "🧹 海灘清理過濾", "🏖️ 適合所有年齡段"],
+                    highlight: "我們保護小衝浪者！"
+                },
+                policyUpdates: {
+                    title: "🔄 政策更新",
+                    text: ["更新時您將看到：", "📆 新潮汐時間表", "💡 重要衝浪公告", "🔔 海灘通知"],
+                    highlight: "請關注潮汐變化！"
+                },
+                contact: {
+                    title: "🛟 需要幫助？呼叫衝浪救援！",
+                    button: "📮 發送漂流瓶訊息"
+                },
+                magicNav: {
+                    homeText: "官方網站",
+                    downloadText: "下載App"
+                },
+                footer: "© 2024 Surfing2048. 捕捉完美浪花！"
+            },
+            zh: {
+                pageTitle: "Surfing2048 隐私保护手册",
+                headerSubtitle: "乘风破浪保护您的隐私",
+                effectiveDate: "生效日期：2024年7月15日",
+                dataProtection: {
+                    title: "🛡️ 数据保护承诺",
+                    text: "Surfing2048 是您在数字海洋中最值得信赖的冲浪伙伴～",
+                    highlight: "我们承诺：",
+                    list: ["🏄♀️ 不收集个人信息", "🌊 无需注册", "🐚 所有数据存储在本地冲浪小屋"]
+                },
+                anonymousData: {
+                    title: "🕶️ 匿名数据处理",
+                    text: ["我们仅收集：", "📊 冲浪统计数据", "🔍 海滩互动模式"],
+                    highlight: "所有数据都乘风破浪匿名航行！"
+                },
+                advertising: {
+                    title: "📺 广告服务",
+                    text: ["应用可能包含：", "🏖️ 冲浪相关广告", "🤝 第三方海滩供应商", "⚠️ 跳转至外部冲浪商店"],
+                    highlight: "请查看第三方潮汐政策"
+                },
+                security: {
+                    title: "🔐 安全措施",
+                    text: ["我们采用：", "🏄♀️ 波浪加密技术", "🦈 防鲨鱼防火墙", "🏝️ 本地海滩存储"],
+                    highlight: "您的数据在我们的冲浪小屋很安全！"
+                },
+                childrenPrivacy: {
+                    title: "👧🏻👦🏼 儿童隐私",
+                    text: ["特别措施：", "🚫 不收集13岁以下小冲浪者数据", "🧹 海滩清理过滤", "🏖️ 适合所有年龄段"],
+                    highlight: "我们保护小冲浪者！"
+                },
+                policyUpdates: {
+                    title: "🔄 政策更新",
+                    text: ["更新时您将看到：", "📆 新潮汐时间表", "💡 重要冲浪公告", "🔔 海滩通知"],
+                    highlight: "请关注潮汐变化！"
+                },
+                contact: {
+                    title: "🛟 需要帮助？呼叫冲浪救援！",
+                    button: "📮 发送漂流瓶消息"
+                },
+                magicNav: {
+                    homeText: "官方网站",
+                    downloadText: "下载App"
+                },
+                footer: "© 2024 Surfing2048. 捕捉完美浪花！"
+            },
+            ja: {
+                pageTitle: "Surfing2048 プライバシー保護",
+                headerSubtitle: "プライバシーの波に乗る",
+                effectiveDate: "発効日：2024年7月15日",
+                dataProtection: {
+                    title: "🛡️ データ保護の約束",
+                    text: "Surfing2048は、デジタル海で最も信頼できるサーフィンパートナーです～",
+                    highlight: "私たちは約束します：",
+                    list: ["🏄♀️ 個人情報を収集しません", "🌊 登録不要", "🐚 すべてのデータは地元のサーフ小屋に保存されます"]
+                },
+                anonymousData: {
+                    title: "🕶️ 匿名データ処理",
+                    text: ["私たちは以下を収集します：", "📊 波乗り統計", "🔍 ビーチのインタラクションパターン"],
+                    highlight: "すべてのデータは匿名で波に乗ります！"
+                },
+                advertising: {
+                    title: "📺 広告サービス",
+                    text: ["アプリには以下が含まれる場合があります：", "🏖️ サーフ関連広告", "🤝 第三者ビーチベンダー", "⚠️ 外部サーフショップへのリダイレクト"],
+                    highlight: "第三者の潮汐ポリシーを確認してください"
+                },
+                security: {
+                    title: "🔐 セキュリティ対策",
+                    text: ["私たちは以下を使用します：", "🏄♀️ 波暗号化技術", "🦈 サメ防止防火壁", "🏝️ ローカルビーチストレージ"],
+                    highlight: "あなたのデータは私たちのサーフ小屋で安全です！"
+                },
+                childrenPrivacy: {
+                    title: "👧🏻👦🏼 子供のプライバシー",
+                    text: ["特別な対策：", "🚫 13歳未満の小さなサーファーからのデータ収集なし", "🧹 ビーチクリーンアップフィルター", "🏖️ 全年齢対象"],
+                    highlight: "私たちは小さなサーファーを守ります！"
+                },
+                policyUpdates: {
+                    title: "🔄 ポリシー更新",
+                    text: ["更新時に以下が表示されます：", "📆 新しい潮汐スケジュール", "💡 重要なサーフィンアドバイザリ", "🔔 ビーチ通知"],
+                    highlight: "潮の変化にご注目ください！"
+                },
+                contact: {
+                    title: "🛟 助けが必要？サーフレスキューを呼んで！",
+                    button: "📮 メッセージボトルを送る"
+                },
+                magicNav: {
+                    homeText: "公式サイト",
+                    downloadText: "アプリをダウンロード"
+                },
+                footer: "© 2024 Surfing2048. 完璧な波をつかまえよう！"
+            },
+            ko: {
+                pageTitle: "Surfing2048 개인정보 보호",
+                headerSubtitle: "개인정보의 파도를 타다",
+                effectiveDate: "시행일: 2024년 7월 15일",
+                dataProtection: {
+                    title: "🛡️ 데이터 보호 약속",
+                    text: "Surfing2048는 디지털 바다에서 가장 신뢰할 수 있는 서핑 파트너입니다～",
+                    highlight: "우리는 약속합니다：",
+                    list: ["🏄♀️ 개인 정보 수집 안 함", "🌊 등록 불필요", "🐚 모든 데이터는 현지 서핑 오두막에 저장"]
+                },
+                anonymousData: {
+                    title: "🕶️ 익명 데이터 처리",
+                    text: ["우리는 다음을 수집합니다：", "📊 파도 타기 통계", "🔍 해변 상호 작용 패턴"],
+                    highlight: "모든 데이터는 익명으로 파도를 탑니다!"
+                },
+                advertising: {
+                    title: "📺 광고 서비스",
+                    text: ["앱에는 다음이 포함될 수 있습니다：", "🏖️ 서핑 관련 광고", "🤝 제3자 해변 공급업체", "⚠️ 외부 서핑 샵으로 리디렉션"],
+                    highlight: "제3자 조류 정책을 확인하세요"
+                },
+                security: {
+                    title: "🔐 보안 조치",
+                    text: ["우리는 다음을 사용합니다：", "🏄♀️ 파도 암호화 기술", "🦈 상어 방지 방화벽", "🏝️ 현지 해변 저장소"],
+                    highlight: "귀하의 데이터는 우리 서핑 오두막에서 안전합니다!"
+                },
+                childrenPrivacy: {
+                    title: "👧🏻👦🏼 어린이 개인정보 보호",
+                    text: ["특별 조치：", "🚫 13세 미만 어린 서퍼 데이터 수집 금지", "🧹 해변 청소 필터", "🏖️ 모든 연령대에 안전"],
+                    highlight: "우리는 어린 서퍼를 보호합니다!"
+                },
+                policyUpdates: {
+                    title: "🔄 정책 업데이트",
+                    text: ["업데이트 시 다음이 표시됩니다：", "📆 새로운 조류 일정", "💡 중요한 서핑 공지", "🔔 해변 알림"],
+                    highlight: "조류 변화를 지켜보세요!"
+                },
+                contact: {
+                    title: "🛟 도움이 필요하세요? 서프 구조대를 호출하세요!",
+                    button: "📮 메시지 병 보내기"
+                },
+                magicNav: {
+                    homeText: "공식 사이트",
+                    downloadText: "앱 다운로드"
+                },
+                footer: "© 2024 Surfing2048. 완벽한 파도를 잡으세요!"
+            }
+        };
+
+        function switchLanguage(lang) {
+            const data = translations[lang];
+            
+            // 更新通用元素
+            document.title = data.pageTitle;
+            document.getElementById("header-subtitle").textContent = data.headerSubtitle;
+            document.getElementById("effective-date").textContent = data.effectiveDate;
+            document.getElementById("footer").textContent = data.footer;
+
+            // 更新導航按鈕
+            document.getElementById("magic-home-text").textContent = data.magicNav.homeText;
+            document.getElementById("magic-download-text").textContent = data.magicNav.downloadText;
+
+            // 定義所有需要更新的區塊
+            const sections = [
+                'dataProtection',
+                'anonymousData',
+                'advertising',
+                'security',
+                'childrenPrivacy',
+                'policyUpdates',
+                'contact'
+            ];
+
+            sections.forEach(section => {
+                // 更新標題
+                const titleElement = document.getElementById(`${section}-title`);
+                if (titleElement) titleElement.textContent = data[section].title;
+
+                // 更新主要文字
+                const textElement = document.getElementById(`${section}-text`);
+                if (textElement) {
+                    textElement.innerHTML = Array.isArray(data[section].text) 
+                        ? data[section].text.join('<br>') 
+                        : data[section].text;
+                }
+
+                // 更新列表內容
+                const listElement = document.getElementById(`${section}-list`);
+                if (listElement && data[section].list) {
+                    listElement.innerHTML = data[section].list.join('<br>');
+                }
+
+                // 更新高亮文字
+                const highlightElement = document.getElementById(`${section}-highlight`);
+                if (highlightElement) {
+                    highlightElement.textContent = data[section].highlight;
+                }
+            });
+
+            // 特別處理聯絡按鈕
+            document.getElementById("contact-button").innerHTML = `<i class="fas fa-envelope"></i> ${data.contact.button}`;
+        }
+
+        // 切換衝浪導航可見性
+        function toggleSurfNav() {
+            document.querySelector('.surf-nav').classList.toggle('active');
+        }
+
+        // 初始化為英文
+        document.addEventListener('DOMContentLoaded', () => {
+            switchLanguage('en');
+        });
+    </script>
+</body>
+</html>
