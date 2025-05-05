@@ -144,26 +144,11 @@
         /* 衝浪者動畫圖示 */
         .surfer-icon {
             position: fixed;
-            top: 30%;               /* 離畫面上緣多一點，可調整 */
-            right: -100px;          /* 起始位置：從畫面外開始 */
             width: 80px;
             height: 80px;
             z-index: 1000;
-            animation: surfAnimation 8s ease-in-out infinite;
+            animation: surfAnimation 6s ease-in-out infinite;
             opacity: 0.9;
-        }
-        
-        /* 動畫效果：從右滑到左 */
-        @keyframes surfAnimation {
-            0% {
-                right: -100px;      /* 起點：畫面右邊外面 */
-            }
-            50% {
-                top: 28%;           /* 中段：稍微上下浮動感 */
-            }
-            100% {
-                right: 50%;        /* 終點：畫面左邊外面 */
-            }
         }
         
         #surfer1 {
