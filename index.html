@@ -233,6 +233,50 @@
             box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
+        /* 联系区块 - 重新设计 */
+        .contact-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            margin-top: 30px;
+            text-align: center;
+            border: 3px solid var(--sand-gold);
+        }
+
+        .contact-icon {
+            font-size: 3em;
+            color: var(--sunset-pink);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--wave-teal) 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-weight: bold;
+            text-decoration: none;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1em;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, var(--wave-teal) 0%, var(--ocean-blue) 100%);
+        }
+
+        .contact-btn i {
+            margin-right: 10px;
+        }
+
         /* 右下角冲浪板下载按钮 */
         .surf-board {
             position: fixed;
@@ -334,11 +378,6 @@
                     <h3 id="feature3-title">Summer Vibes</h3>
                     <p id="feature3-desc">Vibrant beach visuals and relaxing wave sounds create the perfect summer gaming atmosphere.</p>
                 </div>
-                <div class="feature-item">
-                    <i class="fas fa-trophy"></i>
-                    <h3 id="feature4-title">Daily Challenges</h3>
-                    <p id="feature4-desc">Special daily puzzles with bonus rewards to keep the summer fun going all season long.</p>
-                </div>
             </div>
         </div>
 
@@ -393,12 +432,23 @@
             <p id="privacy-desc">We care about your data security. Read how we protect your information.</p>
             <a href="https://ans1lbbb.github.io/Surfing2048/privacy.html" class="privacy-btn" id="privacy-btn" target="_blank">Privacy Policy</a>
         </div>
+
+        <!-- 联系区块 - 重新设计 -->
+        <div class="content contact-section">
+            <i class="fas fa-life-ring contact-icon"></i>
+            <h2 id="contact-title">Need Help?</h2>
+            <p id="contact-desc">Our surf support team is ready to assist you with any questions!</p>
+            <button class="contact-btn" id="contact-btn" onclick="window.location.href='mailto:ans1l@icloud.com'">
+                <i class="fas fa-envelope"></i>
+                <span id="contact-btn-text">Contact Support</span>
+            </button>
+        </div>
     </div>
 
     <footer>
-    <center>
-        <p>© 2025 Surfing2048 | All Rights Reserved</p>
-    </center>
+        <center>
+            <p>© 2025 Surfing2048 | All Rights Reserved</p>
+        </center>
     </footer>
 
     <!-- 右下角冲浪板下载按钮 -->
@@ -413,7 +463,7 @@
             en: {
                 appTitle: "Surfing2048",
                 subtitle: "Ride the Waves of Fun!",
-                welcomeTitle: "🏄♀️ Limited Time Offer!",
+                welcomeTitle: "🏄🏻‍♀️♀️🏄♂️ Limited Time Offer!",
                 mainDescription: "Download now and get the exclusive Surf Goddess Mia card for FREE! Join the summer adventure and collect unique surfers as you conquer the waves in this exciting 2048 puzzle game!",
                 featuresTitle: "Why You'll Love It",
                 feature1Title: "Ocean-Themed 2048",
@@ -422,8 +472,6 @@
                 feature2Desc: "Unlock unique surfers with each achievement. Each has special animations and beach styles to discover.",
                 feature3Title: "Summer Vibes",
                 feature3Desc: "Vibrant beach visuals and relaxing wave sounds create the perfect summer gaming atmosphere.",
-                feature4Title: "Daily Challenges",
-                feature4Desc: "Special daily puzzles with bonus rewards to keep the summer fun going all season long.",
                 tutorialTitle: "How to Play Surfing2048",
                 step1: "Swipe in any direction to move all tiles. Tiles with the same number will merge when they collide.",
                 step2: "After each move, a new tile (either 2 or 4) appears in a random empty spot.",
@@ -439,12 +487,15 @@
                 privacyTitle: "Your Privacy Matters",
                 privacyDesc: "We care about your data security. Read how we protect your information.",
                 privacyBtn: "Privacy Policy",
+                contactTitle: "Need Help?",
+                contactDesc: "Our surf support team is ready to assist you with any questions!",
+                contactBtnText: "Contact Support",
                 downloadText: "Download Now"
             },
             zh: {
                 appTitle: "冲浪女神2048",
                 subtitle: "享受冲浪乐趣！",
-                welcomeTitle: "🏄♀️ 限时优惠！",
+                welcomeTitle: "🏄🏻‍♀️♀️🏄♂️ 限时优惠！",
                 mainDescription: "立即下载即可免费获得专属冲浪女神Mia卡！加入夏日冒险，在这款激动人心的2048拼图游戏中征服海浪，收集独特的冲浪者！",
                 featuresTitle: "游戏特色",
                 feature1Title: "海洋主题2048",
@@ -453,8 +504,6 @@
                 feature2Desc: "每次成就解锁独特的冲浪者。每位都有特殊动画和海滩风格等待发现。",
                 feature3Title: "夏日氛围",
                 feature3Desc: "充满活力的海滩视觉效果和轻松的海浪声营造完美的夏日游戏氛围。",
-                feature4Title: "每日挑战",
-                feature4Desc: "特别的每日谜题和额外奖励，让夏日乐趣持续整个季节。",
                 tutorialTitle: "游戏玩法",
                 step1: "向任意方向滑动移动所有方块。相同数字的方块碰撞时会合并。",
                 step2: "每次移动后，一个新的方块(2或4)会出现在随机空格中。",
@@ -470,12 +519,15 @@
                 privacyTitle: "隐私保护",
                 privacyDesc: "我们重视您的数据安全。了解我们如何保护您的信息。",
                 privacyBtn: "隐私政策",
+                contactTitle: "需要帮助？",
+                contactDesc: "我们的冲浪支持团队随时为您解答问题！",
+                contactBtnText: "联系支持",
                 downloadText: "立即下载"
             },
             zh_tw: {
                 appTitle: "衝浪女神2048",
                 subtitle: "享受衝浪樂趣！",
-                welcomeTitle: "🏄♀️ 限時優惠！",
+                welcomeTitle: "🏄🏻‍♀️♀️🏄♂️ 限時優惠！",
                 mainDescription: "立即下載即可免費獲得專屬衝浪女神Mia卡！加入夏日冒險，在這款激動人心的2048拼圖遊戲中征服海浪，收集獨特的衝浪者！",
                 featuresTitle: "遊戲特色",
                 feature1Title: "海洋主題2048",
@@ -484,8 +536,6 @@
                 feature2Desc: "每次成就解鎖獨特的衝浪者。每位都有特殊動畫和海灘風格等待發現。",
                 feature3Title: "夏日氛圍",
                 feature3Desc: "充滿活力的海灘視覺效果和輕鬆的海浪聲營造完美的夏日遊戲氛圍。",
-                feature4Title: "每日挑戰",
-                feature4Desc: "特別的每日謎題和額外獎勵，讓夏日樂趣持續整個季節。",
                 tutorialTitle: "遊戲玩法",
                 step1: "向任意方向滑動移動所有方塊。相同數字的方塊碰撞時會合併。",
                 step2: "每次移動後，一個新的方塊(2或4)會出現在隨機空格中。",
@@ -501,12 +551,15 @@
                 privacyTitle: "隱私保護",
                 privacyDesc: "我們重視您的數據安全。了解我們如何保護您的信息。",
                 privacyBtn: "隱私政策",
+                contactTitle: "需要幫助？",
+                contactDesc: "我們的衝浪支持團隊隨時為您解答問題！",
+                contactBtnText: "聯繫支持",
                 downloadText: "立即下載"
             },
             ja: {
                 appTitle: "Surfing2048",
                 subtitle: "波乗りの楽しみ！",
-                welcomeTitle: "🏄♀️ 期間限定オファー！",
+                welcomeTitle: "🏄🏻‍♀️♀️🏄♂️ 期間限定オファー！",
                 mainDescription: "今すぐダウンロードすると、限定サーフィン女神Miaカードが無料で手に入ります！このエキサイティングな2048パズルゲームで波を乗りこなし、ユニークなサーファーを集める夏の冒険に参加しましょう！",
                 featuresTitle: "ゲームの特徴",
                 feature1Title: "海をテーマにした2048",
@@ -515,8 +568,6 @@
                 feature2Desc: "達成するごとにユニークなサーファーをアンロック。それぞれに特別なアニメーションとビーチスタイルがあります。",
                 feature3Title: "夏の雰囲気",
                 feature3Desc: "鮮やかなビーチのビジュアルとリラックスできる波の音が、完璧な夏のゲーム雰囲気を作り出します。",
-                feature4Title: "デイリーチャレンジ",
-                feature4Desc: "特別な日替わりパズルとボーナス報酬で、夏の楽しみがシーズン中続きます。",
                 tutorialTitle: "遊び方",
                 step1: "任意の方向にスワイプしてすべてのタイルを移動します。同じ数字のタイルが衝突すると結合します。",
                 step2: "各移動後、新しいタイル(2または4)がランダムな空きスペースに表示されます。",
@@ -532,12 +583,15 @@
                 privacyTitle: "プライバシー保護",
                 privacyDesc: "私たちはあなたのデータセキュリティを重視しています。情報保護の方法をご確認ください。",
                 privacyBtn: "プライバシーポリシー",
+                contactTitle: "お問い合わせ",
+                contactDesc: "サーフサポートチームがいつでも質問にお答えします！",
+                contactBtnText: "サポートに連絡",
                 downloadText: "今すぐダウンロード"
             },
             ko: {
                 appTitle: "Surfing2048",
                 subtitle: "서핑의 즐거움을 느껴보세요!",
-                welcomeTitle: "🏄♀️ 한정 기간 제공!",
+                welcomeTitle: "🏄🏻‍♀️♀️🏄♂️ 한정 기간 제공!",
                 mainDescription: "지금 다운로드하면 독점 서프 여신 Mia 카드를 무료로 받을 수 있습니다! 이 흥미진진한 2048 퍼즐 게임에서 파도를 정복하고 독특한 서퍼들을 수집하는 여름 모험에 참여하세요!",
                 featuresTitle: "게임 특징",
                 feature1Title: "바다 테마의 2048",
@@ -546,8 +600,6 @@
                 feature2Desc: "각 업적 달성 시 독특한 서퍼를 잠금 해제. 각각 특별한 애니메이션과 해변 스타일이 있습니다.",
                 feature3Title: "여름 분위기",
                 feature3Desc: "생동감 넘치는 해변 비주얼과 편안한 파도 소리가 완벽한 여름 게임 분위기를 조성합니다.",
-                feature4Title: "일일 도전",
-                feature4Desc: "특별한 일일 퍼즐과 보너스 보상으로 여름 즐거움을 계속 유지하세요.",
                 tutorialTitle: "게임 방법",
                 step1: "아무 방향으로나 스와이프하여 모든 타일을 이동합니다. 같은 숫자의 타일이 충돌하면 합쳐집니다.",
                 step2: "각 이동 후, 새로운 타일(2 또는 4)이 무작위 빈 공간에 나타납니다.",
@@ -563,6 +615,9 @@
                 privacyTitle: "개인정보 보호",
                 privacyDesc: "우리는 귀하의 데이터 보안을 중요하게 생각합니다. 정보 보호 방법을 확인하세요.",
                 privacyBtn: "개인정보 보호정책",
+                contactTitle: "도움이 필요하세요?",
+                contactDesc: "서핑 지원 팀이 언제든지 질문에 답변해 드립니다!",
+                contactBtnText: "지원팀에 문의",
                 downloadText: "지금 다운로드"
             }
         };
@@ -583,8 +638,6 @@
             document.getElementById('feature2-desc').textContent = data.feature2Desc;
             document.getElementById('feature3-title').textContent = data.feature3Title;
             document.getElementById('feature3-desc').textContent = data.feature3Desc;
-            document.getElementById('feature4-title').textContent = data.feature4Title;
-            document.getElementById('feature4-desc').textContent = data.feature4Desc;
             document.getElementById('tutorial-title').textContent = data.tutorialTitle;
             document.getElementById('step1').textContent = data.step1;
             document.getElementById('step2').textContent = data.step2;
@@ -600,10 +653,13 @@
             document.getElementById('privacy-title').textContent = data.privacyTitle;
             document.getElementById('privacy-desc').textContent = data.privacyDesc;
             document.getElementById('privacy-btn').textContent = data.privacyBtn;
+            document.getElementById('contact-title').textContent = data.contactTitle;
+            document.getElementById('contact-desc').textContent = data.contactDesc;
+            document.getElementById('contact-btn-text').textContent = data.contactBtnText;
             document.getElementById('download-text').textContent = data.downloadText;
         }
 
-        // 初始化默认语言
+        // 初始化默认语言为英文
         document.addEventListener('DOMContentLoaded', () => {
             switchLanguage('en');
         });
