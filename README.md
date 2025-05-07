@@ -1,2 +1,2 @@
-# Surfing2048
-Official website and privacy policy for Surfing2048 app
+# Beach Goddess Adventure
+Official website and privacy policy for 『Beach Goddess Adventure』 app
