@@ -1,2 +1,2 @@
-# Beach Goddess Adventure
-Official website and privacy policy for 『Beach Goddess Adventure』 app
+# AIOS Goddess
+Official website and privacy policy for 『AIOS Goddess』IOS app
