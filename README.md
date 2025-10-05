@@ -1,2 +1,2 @@
 # AIOS Goddess
-Official website and privacy policy for 『AIOS Goddess』IOS app
+Official website and privacy policy for 『AIOS Realm』IOS app
