@@ -484,6 +484,32 @@
             flex-grow: 1;
         }
 
+        /* 隱私政策連結區域 - 修復部分 */
+        .privacy-link-container {
+            margin-top: 15px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .privacy-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(0, 168, 255, 0.1);
+            width: auto;
+        }
+
+        .privacy-link:hover {
+            transform: translateX(5px);
+            background: rgba(0, 168, 255, 0.2);
+        }
+
         /* 遊戲故事區 */
         .story-section {
             background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
@@ -1093,26 +1119,6 @@
             line-height: 1.6;
             flex-grow: 1;
         }
-        
-        /* 隱私政策連結 */
-        .privacy-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--ocean-blue);
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s;
-            margin-top: 10px;
-            padding: 8px 16px;
-            border-radius: 8px;
-            background: rgba(0, 168, 255, 0.1);
-        }
-        
-        .privacy-link:hover {
-            transform: translateX(5px);
-            background: rgba(0, 168, 255, 0.2);
-        }
     </style>
 </head>
 <body>
@@ -1228,11 +1234,13 @@
                         <i class="fas fa-shield-alt"></i>
                     </div>
                     <h3 class="feature-title" id="feature6-title">Privacy Protection</h3>
-                    <p class="feature-description" id="feature6-desc">Your game data is stored only on your device. We value and protect your privacy and security.
-                    <a href="https://ans1lbbb.github.io/AIOS/privacy.html" class="privacy-link" target="_blank">
-                        <i class="fas fa-lock"></i> <span id="privacy-link-text">Privacy Policy</span>
-                    </a>
-                    </p>
+                    <p class="feature-description" id="feature6-desc">Your game data is stored only on your device. We value and protect your privacy and security.</p>
+                    <!-- 修復：將隱私政策連結獨立出來，確保始終可見 -->
+                    <div class="privacy-link-container">
+                        <a href="https://ans1lbbb.github.io/AIOS/privacy.html" class="privacy-link" target="_blank">
+                            <i class="fas fa-lock"></i> <span id="privacy-link-text">Privacy Policy</span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
