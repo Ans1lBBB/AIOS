@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AIOS Realm - Rebuild the memories of ocean goddesses">
-    <title>AIOS Realm</title>
+    <title>AIOS Realm - Rebuild the memories of ocean goddesses</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <style>
@@ -15,662 +14,1849 @@
             --sand-gold: #fbc531;
             --coral-red: #ff7f50;
             --seafoam-green: #7bed9f;
+            --text-dark: #2D3748;
+            --card-bg: #FFFFFF;
+            --light-bg: #F7FAFC;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, var(--ocean-blue) 0%, var(--wave-teal) 100%);
-            color: white;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
+            background: linear-gradient(180deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            padding-bottom: 80px;
         }
 
-        header {
-            background: linear-gradient(135deg, var(--sunset-pink) 0%, var(--sand-gold) 100%);
-            padding: 50px 20px 70px;
+        /* 背景装饰元素 */
+        .bg-decoration {
+            position: fixed;
+            z-index: 0;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .bg-palm {
+            top: 10%;
+            left: 5%;
+            font-size: 80px;
+            animation: sway 15s ease-in-out infinite;
+        }
+        
+        .bg-starfish {
+            top: 15%;
+            right: 8%;
+            font-size: 60px;
+            animation: float 12s ease-in-out infinite 2s;
+        }
+        
+        .bg-shell {
+            bottom: 20%;
+            left: 7%;
+            font-size: 70px;
+            animation: float 10s ease-in-out infinite 1s;
+        }
+        
+        .bg-moon {
+            bottom: 15%;
+            right: 5%;
+            font-size: 65px;
+            animation: glow 20s ease-in-out infinite;
+        }
+        
+        .bg-star {
+            top: 30%;
+            left: 15%;
+            font-size: 40px;
+            animation: twinkle 5s ease-in-out infinite;
+        }
+        
+        .bg-wave {
+            top: 40%;
+            right: 20%;
+            font-size: 50px;
+            animation: wave 8s ease-in-out infinite;
+        }
+        
+        .bg-goddess {
+            top: 60%;
+            left: 20%;
+            font-size: 55px;
+            animation: float 15s ease-in-out infinite 3s;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.2; }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.1; }
+            50% { opacity: 0.3; }
+        }
+
+        @keyframes wave {
+            0%, 100% { transform: translateX(0) rotate(0deg); }
+            50% { transform: translateX(10px) rotate(5deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 頂部導航 */
+        .top-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 168, 255, 0.2);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 168, 255, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--wave-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .language-toggle {
+            display: flex;
+            gap: 5px;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 25px;
+            padding: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .lang-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 20px;
+            background: transparent;
+            color: var(--text-dark);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .lang-btn:hover, .lang-btn.active {
+            background: var(--ocean-blue);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 168, 255, 0.3);
+        }
+
+        /* 限時優惠橫幅 */
+        .promo-banner {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--wave-teal));
+            color: white;
             text-align: center;
-            border-bottom: 6px solid var(--coral-red);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 12px 20px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            box-shadow: 0 2px 10px rgba(0, 168, 255, 0.3);
+        }
+
+        /* 底部導航 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 100;
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.05);
+            padding: 12px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .nav-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 8px 12px;
+            border-radius: 15px;
+            min-width: 70px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--ocean-blue);
+            background: rgba(0, 168, 255, 0.1);
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+
+        .nav-text {
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* 英雄區域 */
+        .hero {
+            padding: 80px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .app-icon {
+            width: 140px;
+            height: 140px;
+            border-radius: 30px;
+            margin: 0 auto 30px;
+            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
+            transition: transform 0.5s ease;
+            border: 3px solid white;
+        }
+
+        .app-icon:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            color: var(--ocean-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.6;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.3);
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--wave-teal));
+            color: white;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--ocean-blue);
+            border: 2px solid var(--ocean-blue);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 168, 255, 0.4);
+        }
+
+        /* 卡牌贈送橫幅 */
+        .card-banner {
+            background: linear-gradient(135deg, var(--sunset-pink), var(--coral-red));
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(255, 107, 129, 0.3);
             position: relative;
             overflow: hidden;
         }
 
-        .logo {
-            font-family: 'Pacifico', cursive;
-            font-size: 3.5em;
-            font-weight: normal;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-            margin-bottom: 10px;
-            color: white;
-            letter-spacing: 1px;
+        .card-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30 Z" fill="%23FFFFFF"/></svg>');
+            background-size: 80px 80px;
         }
 
-        .subtitle {
-            font-family: 'Pacifico', cursive;
-            font-size: 1.5em;
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
-            margin-bottom: 20px;
+        .banner-content {
+            position: relative;
+            z-index: 1;
         }
 
-        .language-switcher {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 15px;
-        }
-
-        .language-switcher button {
-            background-color: rgba(255,255,255,0.3);
-            color: white;
-            border: 2px solid white;
-            padding: 6px 18px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: all 0.3s ease;
-            font-family: 'Poppins', sans-serif;
-            font-weight: bold;
-        }
-
-        .language-switcher button:hover {
-            background-color: white;
-            color: var(--sunset-pink);
-        }
-
-        .container {
-            padding: 30px 20px;
-            text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .content {
-            margin: 25px 0;
-            padding: 30px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-
-        .content h2 {
-            color: var(--ocean-blue);
-            font-size: 2em;
-            margin-bottom: 20px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            font-family: 'Pacifico', cursive;
-        }
-
-        .content p {
-            font-size: 1.1em;
-            color: #333;
+        .banner-title {
+            font-size: 2rem;
             margin-bottom: 15px;
+            font-weight: 700;
         }
 
-        .feature-list, .additional-features-list, .why-choose-us-list {
-            display: flex;
-            flex-direction: column;
+        .banner-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .banner-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .banner-feature {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 12px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+
+        .banner-note {
+            margin-top: 15px;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* 功能特色 */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--ocean-blue);
+            margin-bottom: 40px;
+            position: relative;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--wave-teal));
+            border-radius: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
         }
 
-        .feature-item, .additional-feature-item, .why-choose-item {
-            background: white;
-            padding: 25px;
+        .feature-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px 25px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 168, 255, 0.2);
             text-align: center;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-
-        .feature-item:hover, .additional-feature-item:hover, .why-choose-item:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .feature-item i, .additional-feature-item i, .why-choose-item i {
-            font-size: 2.8em;
-            color: var(--coral-red);
-            margin-bottom: 15px;
-        }
-
-        .feature-item h3, .additional-feature-item h3, .why-choose-item h3 {
-            color: var(--ocean-blue);
-            font-size: 1.4em;
-            margin-bottom: 12px;
-        }
-
-        /* 衝浪者動畫圖示 */
-        .surfer-icon {
-            position: fixed;
-            width: 80px;
-            height: 80px;
-            z-index: 1000;
-            animation: surfAnimation 6s ease-in-out infinite;
-            opacity: 0.9;
-        }
-        
-        #surfer1 {
-            top: 100px;
-            right: 40px;
-            font-size: 4em;
-            color: var(--sand-gold);
-            animation-delay: 0s;
-        }
-
-        #surfer2 {
-            top: 200px;
-            right: 60px;
-            font-size: 3.5em;
-            color: var(--seafoam-green);
-            animation-delay: 1s;
-        }
-
-        @keyframes surfAnimation {
-            0%, 100% { transform: translate(0, 0) rotate(-5deg); }
-            25% { transform: translate(-10px, -15px) rotate(5deg); }
-            50% { transform: translate(5px, -20px) rotate(-8deg); }
-            75% { transform: translate(-5px, -10px) rotate(3deg); }
-        }
-
-        /* 波浪装饰 */
-        .wave-decoration {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 120px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.2)" d="M0,192L48,197.3C96,203,192,213,288,229.3C384,245,480,267,576,250.7C672,235,768,181,864,181.3C960,181,1056,235,1152,234.7C1248,235,1344,181,1392,154.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-            background-size: cover;
-            z-index: -1;
-        }
-
-        /* 游戏教程区块 */
-        .tutorial-steps {
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            text-align: left;
-            margin-top: 30px;
+            height: 100%;
         }
 
-        .tutorial-step {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 168, 255, 0.2);
         }
 
-        .step-number {
-            background: var(--coral-red);
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--wave-teal));
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+            height: 70px;
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-shrink: 0;
-            font-weight: bold;
         }
 
-        /* 隐私政策按钮 */
-        .privacy-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: linear-gradient(135deg, var(--sunset-pink) 0%, var(--coral-red) 100%);
-            color: white;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: bold;
-            margin-top: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-
-        .privacy-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-        }
-
-        /* 联系区块 - 重新设计 */
-        .contact-section {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            margin-top: 30px;
-            text-align: center;
-            border: 3px solid var(--sand-gold);
-        }
-
-        .contact-icon {
-            font-size: 3em;
-            color: var(--sunset-pink);
+        .feature-title {
+            font-size: 1.4rem;
+            color: var(--ocean-blue);
             margin-bottom: 15px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        /* 遊戲故事區 */
+        .story-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 25px;
+            padding: 60px 40px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        .story-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30 Z" fill="%2300a8ff"/></svg>');
+            background-size: 80px 80px;
+        }
+
+        .story-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .story-title {
+            font-size: 1.8rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .story-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+
+        .disclaimer-box {
+            background: #E3F2FD;
+            border: 1px solid var(--ocean-blue);
+            border-radius: 15px;
+            padding: 20px 25px;
+            margin: 30px 0;
+            position: relative;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        /* 聯絡我們 */
+        .contact-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--wave-teal));
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            color: var(--ocean-blue);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .contact-description {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.6;
         }
 
         .contact-btn {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--ocean-blue) 0%, var(--wave-teal) 100%);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--wave-teal));
             color: white;
-            padding: 14px 32px;
             border-radius: 30px;
-            font-weight: bold;
             text-decoration: none;
-            margin-top: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1em;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 168, 255, 0.3);
+            margin-top: 10px;
         }
 
         .contact-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, var(--wave-teal) 0%, var(--ocean-blue) 100%);
+            box-shadow: 0 8px 20px rgba(0, 168, 255, 0.4);
         }
 
-        .contact-btn i {
-            margin-right: 10px;
+        /* 其他應用 */
+        .other-apps-section {
+            padding: 80px 0;
         }
 
-        /* 右下角冲浪板下载按钮 */
-        .surf-board {
+        .apps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .app-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .app-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 168, 255, 0.2);
+        }
+
+        .app-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--wave-teal));
+        }
+
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .app-icon-small {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .app-title {
+            font-size: 1.3rem;
+            color: var(--ocean-blue);
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .app-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .app-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .app-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .app-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            align-self: flex-start;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(0, 168, 255, 0.1);
+        }
+
+        .app-link:hover {
+            transform: translateX(5px);
+            background: rgba(0, 168, 255, 0.2);
+        }
+
+        /* 下載區域 */
+        .download-section {
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 25px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.03"><path d="M30,30 Q50,10 70,30 T90,50 T70,70 T50,90 T30,70 T10,50 T30,30 Z" fill="%2300a8ff"/></svg>');
+            background-size: 80px 80px;
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .download-title {
+            font-size: 2rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .download-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .app-store-badge {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .app-store-badge img {
+            height: 55px;
+            border-radius: 12px;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .app-store-badge:hover img {
+            transform: scale(1.05);
+        }
+
+        /* 頁腳 */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #666;
+            font-size: 0.9rem;
+            padding: 30px 20px;
+            border-top: 1px solid #E2E8F0;
+        }
+
+        .footer-text {
+            margin-bottom: 20px;
+        }
+
+        /* 衝浪板側邊欄 */
+        .surf-nav {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 200px;
+            bottom: 40px;
+            right: -220px;
+            z-index: 1000;
+            transition: right 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .surf-nav.active {
+            right: 0;
+        }
+
+        .surf-trigger {
+            position: absolute;
+            left: -70px;
+            width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, var(--sunset-pink) 0%, var(--sand-gold) 100%);
-            border-radius: 35px;
+            background: var(--ocean-blue);
+            border-radius: 20px 0 0 20px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            font-size: 2.2rem;
             cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 999;
-            overflow: hidden;
+            box-shadow: -8px 8px 25px rgba(56,163,209,0.4);
+            transition: 0.4s;
         }
 
-        .surf-board:hover {
-            transform: scale(1.05) translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        .surf-trigger:hover {
+            transform: rotate(-15deg) scale(1.15);
         }
 
-        .surf-board i {
-            margin-right: 12px;
-            font-size: 1.8em;
+        .surf-panel {
+            background: white;
+            border-radius: 25px 0 0 25px;
+            padding: 25px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 220px;
         }
 
-        .surf-board::after {
-            content: "";
-            position: absolute;
-            top: -15px;
-            left: 20%;
-            width: 60%;
-            height: 30px;
-            background: rgba(255,255,255,0.3);
-            transform: rotate(-5deg);
-            border-radius: 50%;
+        .nav-link-app {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 18px;
+            background: rgba(56,163,209,0.08);
+            color: var(--ocean-blue);
+            text-decoration: none;
+            transition: all 0.4s;
+            font-size: 1rem;
         }
 
-        /* 响应式调整 */
+        .nav-link-app img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin-right: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .nav-link-app .app-info {
+            flex-grow: 1;
+        }
+
+        .nav-link-app .app-name {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .nav-link-app .app-download {
+            font-size: 0.75rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-link-app:hover {
+            background: var(--ocean-blue);
+            color: white;
+            transform: translateX(-15px);
+            box-shadow: 0 5px 15px rgba(56,163,209,0.3);
+        }
+
+        .nav-link-app:hover .app-download {
+            color: white;
+        }
+
+        /* 響應式設計 */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.4rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .logo { font-size: 2.5em; }
-            .subtitle { font-size: 1.2em; }
-            .surfer-icon { display: none; }
-            .surf-board { width: 180px; height: 60px; bottom: 20px; right: 20px; }
+            .top-nav {
+                padding: 12px 0;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .lang-btn {
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .hero {
+                padding: 60px 0 30px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .features-grid, .apps-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .story-section {
+                padding: 40px 25px;
+            }
+            
+            .contact-container {
+                padding: 30px 25px;
+            }
+            
+            .nav-text {
+                font-size: 0.7rem;
+            }
+            
+            .surf-nav {
+                bottom: 25px;
+                right: -200px;
+            }
+            
+            .surf-panel {
+                width: 200px;
+            }
+            
+            .app-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .feature-card, .app-card {
+                padding: 20px 15px;
+            }
+            
+            .contact-container {
+                padding: 25px 20px;
+            }
+            
+            .app-icon {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .footer-text {
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+            }
+        }
+        
+        /* 免責聲明區域 */
+        .disclaimer-section {
+            background: #E3F2FD;
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid var(--ocean-blue);
+            position: relative;
+        }
+        
+        .disclaimer-section h3 {
+            color: var(--ocean-blue);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .disclaimer-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        
+        .disclaimer-section ul {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .disclaimer-section li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 10px;
+        }
+        
+        .disclaimer-section li::before {
+            content: '🌊';
+            margin-right: 8px;
+        }
+        
+        /* 遊戲玩法區 */
+        .gameplay-section {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            border-radius: 25px;
+            padding: 60px 40px;
+            margin: 50px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+        
+        .gameplay-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .gameplay-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 168, 255, 0.2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .gameplay-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 168, 255, 0.2);
+        }
+        
+        .gameplay-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--ocean-blue), var(--wave-teal));
+        }
+        
+        .gameplay-icon {
+            font-size: 2.5rem;
+            color: var(--ocean-blue);
+            margin-bottom: 20px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .gameplay-title {
+            font-size: 1.4rem;
+            color: var(--ocean-blue);
+            margin-bottom: 15px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        
+        .gameplay-description {
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+        
+        /* 隱私政策連結 */
+        .privacy-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin-top: 10px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            background: rgba(0, 168, 255, 0.1);
+        }
+        
+        .privacy-link:hover {
+            transform: translateX(5px);
+            background: rgba(0, 168, 255, 0.2);
         }
     </style>
 </head>
 <body>
-    <!-- 冲浪者动画图标 -->
-    <i class="fas fa-surfing surfer-icon" id="surfer1"></i>
-    <i class="fas fa-swimmer surfer-icon" id="surfer2"></i>
-    <div class="wave-decoration"></div>
-
-    <header>
-        <div class="logo" id="app-title">AIOS Realm</div>
-        <p class="subtitle" id="subtitle">Uncover the Mysteries of Ancient AIOS Sea</p>
-        <div class="language-switcher">
-            <button onclick="switchLanguage('en')">EN</button>
-            <button onclick="switchLanguage('zh')">简体中文</button>
-            <button onclick="switchLanguage('zh_tw')">繁體中文</button>
-            <button onclick="switchLanguage('ja')">日本語</button>
-            <button onclick="switchLanguage('ko')">한국어</button>
-        </div>
-    </header>
-
+    <!-- 背景装饰元素 -->
+    <div class="bg-decoration bg-palm">🌴</div>
+    <div class="bg-decoration bg-starfish">🌟</div>
+    <div class="bg-decoration bg-shell">🐚</div>
+    <div class="bg-decoration bg-moon">🌙</div>
+    <div class="bg-decoration bg-star">⭐</div>
+    <div class="bg-decoration bg-wave">🌊</div>
+    <div class="bg-decoration bg-goddess">🧜‍♀️</div>
+    
+    <!-- 限時優惠橫幅 -->
+    <div class="promo-banner" id="promo-banner">
+        Limited Offer: Download now and get the exclusive 'Tide Arbiter Alyss' card for FREE!
+    </div>
+    
     <div class="container">
-        <!-- 游戏描述 -->
-        <div class="content" id="description">
-            <h2 id="welcome-title">🏄♀️ Limited Time Offer!</h2>
-            <p id="main-description">Download now and get the exclusive 'Tide Arbiter Alyss' card for FREE! Begin your journey to restore the divine memories of AIOS Realmes in this unique puzzle adventure!</p>
-            <div class="feature-item">
-                <i class="fas fa-quote-left"></i>
-                <p id="goddess-quote">"The tide of fate never rests for anyone."</p>
-                <p id="goddess-desc">Alyss, the Tide Arbiter, controlled the tides and fate, and due to her power threatening the ancient AIOS Sea's order, was sealed deep beneath the ocean. Her seal was not just a confinement but a protection to prevent her endless power from overwhelming the world.</p>
+        <!-- 頂部導航 -->
+        <nav class="top-nav">
+            <div class="logo-container">
+                <img src="https://raw.githubusercontent.com/Ans1lBBB/AIOS/main/AIOS_icon.png" alt="AIOS Realm" class="logo-icon">
+                <div class="logo-text">AIOS Realm</div>
             </div>
-            <a href="https://apps.apple.com/app/id6745821288/" class="download-button">
-                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" 
-                     alt="Download on the App Store"
-                     style="height: 60px; margin: 20px 0;">
+            <div class="language-toggle">
+                <button class="lang-btn active" onclick="switchLanguage('en')">EN</button>
+                <button class="lang-btn" onclick="switchLanguage('zh')">简体中文</button>
+                <button class="lang-btn" onclick="switchLanguage('zh_tw')">繁體中文</button>
+                <button class="lang-btn" onclick="switchLanguage('ja')">日本語</button>
+                <button class="lang-btn" onclick="switchLanguage('ko')">한국어</button>
+            </div>
+        </nav>
+
+        <!-- 英雄區域 -->
+        <section class="hero">
+            <div class="hero-content">
+                <img src="https://raw.githubusercontent.com/Ans1lBBB/AIOS/main/AIOS_icon.png" alt="AIOS Realm" class="app-icon">
+                <h1 class="hero-title" id="hero-title">AIOS Realm</h1>
+                <p class="hero-subtitle" id="hero-subtitle">Rebuild the memories of ocean goddesses<br>Uncover the mysteries of ancient AIOS Sea</p>
+                
+                <!-- 卡牌贈送橫幅 -->
+                <div class="card-banner">
+                    <div class="banner-content">
+                        <h2 class="banner-title" id="banner-title">Download Now, Get Alyss Card FREE!</h2>
+                        <p class="banner-subtitle" id="banner-subtitle">New players receive the exclusive 'Tide Arbiter Alyss' card for FREE!</p>
+                        
+                        <div class="banner-features">
+                            <div class="banner-feature" id="banner-feature1">Unique Goddess Card</div>
+                            <div class="banner-feature" id="banner-feature2">Beginner Boost</div>
+                            <div class="banner-feature" id="banner-feature3">Limited Time Only</div>
+                        </div>
+                        
+                        <p class="banner-note" id="banner-note">Start your journey to restore the divine memories of AIOS Realms!</p>
+                        
+                        <!-- App Store徽章 -->
+                        <div class="app-store-badge">
+                            <a href="https://apps.apple.com/app/id6745821288" target="_blank">
+                                <img src="https://developer.apple.com/app-store/marketing/guidelines/images/badge-download-on-the-app-store.svg" alt="Download on the App Store">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="hero-buttons">
+                    <a href="#features" class="btn btn-secondary">
+                        <i class="fas fa-star"></i> <span id="learn-more-btn">Learn More Features</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能特色 -->
+        <section class="section" id="features">
+            <h2 class="section-title" id="features-title">Game Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3 class="feature-title" id="feature1-title">Unique Goddesses</h3>
+                    <p class="feature-description" id="feature1-desc">Collect different goddesses, each representing different aspects of the sea with their own stories and personalities.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3 class="feature-title" id="feature2-title">Beautiful Art Style</h3>
+                    <p class="feature-description" id="feature2-desc">Enjoy vibrant beach visuals and relaxing wave sounds that create the perfect summer gaming atmosphere.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chess"></i>
+                    </div>
+                    <h3 class="feature-title" id="feature3-title">Innovative Gameplay</h3>
+                    <p class="feature-description" id="feature3-desc">Combine cross-sliding with memory matching mechanics to unlock new goddess cards and progress through the story.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <h3 class="feature-title" id="feature4-title">Ocean Adventure</h3>
+                    <p class="feature-description" id="feature4-desc">Explore the mysterious AIOS Sea, uncover hidden secrets, and restore the divine memories of ocean goddesses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3 class="feature-title" id="feature5-title">Memory Collection</h3>
+                    <p class="feature-description" id="feature5-desc">Gather scattered memory fragments across the ocean and piece together the forgotten history of the goddesses.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="feature-title" id="feature6-title">Privacy Protection</h3>
+                    <p class="feature-description" id="feature6-desc">Your game data is stored only on your device. We value and protect your privacy and security.
+                    <a href="https://ans1lbbb.github.io/AIOS/privacy.html" class="privacy-link" target="_blank">
+                        <i class="fas fa-lock"></i> <span id="privacy-link-text">Privacy Policy</span>
+                    </a>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 遊戲故事區 -->
+        <section class="story-section" id="story">
+            <div class="story-content">
+                <h2 class="story-title" id="story-title">The AIOS Legend</h2>
+                <p class="story-description" id="story-description">In the mythical AIOS realm, lost between legends and myths, existed goddesses who controlled the power of the ocean. They each represented different aspects of the sea—the morning tides, the azure abyss, the dreams of coral reefs, the waves of the night... They originally guarded the balance of the world, maintaining humanity's memories and hopes of the sea.</p>
+                
+                <p class="story-description" id="story-description2">However, tens of thousands of years ago, a sudden calamity swept through the entire AIOS realm. The goddesses' divine forms shattered, their memories broken into countless glittering fragments scattered across the corners of the sea and temporal rifts. With their divine power collapsing, the divine realm gradually spiraled out of control. If they cannot be awakened before their memories completely disappear, the ocean will sink into the abyss forever, and the world will meet its end.</p>
+                
+                <p class="story-description" id="story-description3">Until a thousand years ago, an ancient prophecy foretold—when the memory fragments return to the temple, the goddesses sleeping in the sea will awaken once more, guiding the world toward true awakening. The only power that can restart this barrier is to gather all the goddesses' memories and restore their "Primordial Divine Forms."</p>
+                
+                <div class="disclaimer-box">
+                    <p><strong id="disclaimer-title">🌊 Your Mission:</strong> <span id="disclaimer-text">As the chosen "Memory Traveler," you will embark on a journey to retrieve the goddesses' memories. Starting from the power of water droplets, gradually gather water to form the sea, reassemble the memory fragments of the goddesses, awaken their divine forms, and uncover the truth behind the AIOS Sea. Only then will the legendary "Core of Divinity" restart, and the world have hope for rebirth.</span></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 遊戲玩法區 -->
+        <section class="gameplay-section" id="gameplay">
+            <h2 class="section-title" id="gameplay-title">How to Play</h2>
+            <div class="gameplay-grid">
+                <div class="gameplay-card">
+                    <div class="gameplay-icon">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <h3 class="gameplay-title" id="gameplay1-title">Swipe & Match</h3>
+                    <p class="gameplay-description" id="gameplay1-desc">Swipe in four directions to gather water elements and match identical memory fragments to merge them into complete memories.</p>
+                </div>
+                <div class="gameplay-card">
+                    <div class="gameplay-icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="gameplay-title" id="gameplay2-title">Collect Goddesses</h3>
+                    <p class="gameplay-description" id="gameplay2-desc">Complete memory sets to restore a goddess's true form and unlock her story. Each goddess has unique abilities and background.</p>
+                </div>
+                <div class="gameplay-card">
+                    <div class="gameplay-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3 class="gameplay-title" id="gameplay3-title">Explore the Sea</h3>
+                    <p class="gameplay-description" id="gameplay3-desc">Navigate through different ocean zones, each with unique challenges and hidden memory fragments waiting to be discovered.</p>
+                </div>
+                <div class="gameplay-card">
+                    <div class="gameplay-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3 class="gameplay-title" id="gameplay4-title">Special Combinations</h3>
+                    <p class="gameplay-description" id="gameplay4-desc">Discover special combinations to unlock hidden content and progress faster through the mystical AIOS realm.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 免責聲明區域 -->
+        <section class="disclaimer-section" id="disclaimer-section">
+            <h3><i class="fas fa-exclamation-triangle"></i> <span id="disclaimer-section-title">Disclaimer</span></h3>
+            <p id="disclaimer-section-p1">Dear player, to ensure you enjoy AIOS Realm properly, please read the following disclaimer carefully:</p>
+            <ul>
+                <li id="disclaimer-section-li1">AIOS Realm is an entertainment game and does not provide any form of investment or financial advice</li>
+                <li id="disclaimer-section-li2">In-game purchases are optional and not required to enjoy the core gameplay experience</li>
+                <li id="disclaimer-section-li3">Please maintain a healthy balance between gaming and real-life activities</li>
+                <li id="disclaimer-section-li4">Game content is fictional and any resemblance to real persons or events is coincidental</li>
+                <li id="disclaimer-section-li5">We value your privacy, all game data is stored only on your device and will not be uploaded to servers</li>
+            </ul>
+            <p id="disclaimer-section-p2">Using this game means you have read and agreed to the above disclaimer content. Wishing you an enjoyable gaming experience! 🌊</p>
+        </section>
+
+        <!-- 其他應用 -->
+        <section class="other-apps-section" id="apps">
+            <h2 class="section-title" id="other-apps-title">Other Selected Apps</h2>
+            <div class="apps-grid">
+                <div class="app-card">
+                    <div class="app-header">
+                        <img src="https://raw.githubusercontent.com/Ans1lBBB/ProfitFairy/main/ProfitFairy_icon.png" alt="ProfitFairy" class="app-icon-small">
+                        <div>
+                            <h3 class="app-title" id="app1-title">ProfitFairy</h3>
+                            <p class="app-subtitle" id="app1-subtitle">Profit Calculator</p>
+                        </div>
+                    </div>
+                    <p class="app-description" id="app1-description">The ultimate tool designed for e-commerce sellers and entrepreneurs, accurately calculating costs, prices and profit margins in seconds. With intuitive interface and powerful features, it helps you make informed business decisions and maximize your profits. Perfect for small business owners, dropshippers, and anyone selling online.</p>
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/app/id6740332215" class="app-link" target="_blank" id="app1-link">
+                            <i class="fas fa-download"></i> <span>Download App</span>
+                        </a>
+                        <a href="https://ans1lbbb.github.io/ProfitFairy/index.html" class="app-link" target="_blank" id="app1-website">
+                            <i class="fas fa-external-link-alt"></i> <span>Website</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="app-card">
+                    <div class="app-header">
+                        <img src="https://raw.githubusercontent.com/Ans1lBBB/RubyDays/main/RubyDays_icon.png" alt="RubyDays" class="app-icon-small">
+                        <div>
+                            <h3 class="app-title" id="app2-title">RubyDays</h3>
+                            <p class="app-subtitle" id="app2-subtitle">Your Period Bestie</p>
+                        </div>
+                    </div>
+                    <p class="app-description" id="app2-description">Royal-grade wellness wisdom, tailored for modern ladies. Pioneering integration of TCM classics essence, accurately corresponding to menstrual cycle phases. Track your cycle, receive personalized health insights, and discover ancient wellness practices adapted for contemporary life. Your companion for holistic feminine health and wellbeing.</p>
+                    <div class="app-links">
+                        <a href="https://apps.apple.com/app/id6752606069" class="app-link" target="_blank" id="app2-link">
+                            <i class="fas fa-download"></i> <span>Download App</span>
+                        </a>
+                        <a href="https://ans1lbbb.github.io/RubyDays/index.html" class="app-link" target="_blank" id="app2-website">
+                            <i class="fas fa-external-link-alt"></i> <span>Website</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 聯絡我們 -->
+        <section class="contact-section" id="contact">
+            <h2 class="section-title" id="contact-title">Contact Us</h2>
+            <div class="contact-container">
+                <h3 class="contact-title" id="contact-subtitle">Dear player, we are here to listen to your voice</h3>
+                <p class="contact-description" id="contact-description">Whether it's about your experience with AIOS Realm, feature ideas, or anything you'd like to share, we value and look forward to receiving your message. Click the button below to contact us via email～</p>
+                
+                <a href="mailto:ans1l@icloud.com?subject=AIOS Realm User Feedback" class="contact-btn">
+                    <i class="fas fa-envelope"></i> <span id="contact-btn-text">Send Email to Us</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- 頁腳 -->
+        <footer class="footer">
+            <div class="footer-text" id="footer-text">
+                <p>© 2025 AIOS Realm - Rebuild the memories of ocean goddesses</p>
+                <p>Uncover the mysteries of ancient AIOS Sea</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+        <div class="nav-links">
+            <a href="#features" class="nav-link">
+                <i class="fas fa-star nav-icon"></i>
+                <span class="nav-text" id="nav-features">Features</span>
+            </a>
+            <a href="#story" class="nav-link">
+                <i class="fas fa-book nav-icon"></i>
+                <span class="nav-text" id="nav-story">Story</span>
+            </a>
+            <a href="#apps" class="nav-link">
+                <i class="fas fa-th-large nav-icon"></i>
+                <span class="nav-text" id="nav-apps">Other Apps</span>
+            </a>
+            <a href="#contact" class="nav-link">
+                <i class="fas fa-envelope nav-icon"></i>
+                <span class="nav-text" id="nav-contact">Contact</span>
             </a>
         </div>
+    </nav>
 
-        <!-- 起源故事 -->
-        <div class="content" id="origin">
-            <h2 id="origin-title">The AIOS Legend</h2>
-            <div class="feature-item">
-                <i class="fas fa-book-open"></i>
-                <p id="origin-desc">In the mythical AIOS realm, lost between legends and myths, existed goddesses who controlled the power of the ocean. They each represented different aspects of the sea—the morning tides, the azure abyss, the dreams of coral reefs, the waves of the night... They originally guarded the balance of the world, maintaining humanity's memories and hopes of the sea.</p>
-                <p id="origin-desc2">However, tens of thousands of years ago, a sudden calamity swept through the entire AIOS realm. The goddesses' divine forms shattered, their memories broken into countless glittering fragments scattered across the corners of the sea and temporal rifts. With their divine power collapsing, the divine realm gradually spiraled out of control. If they cannot be awakened before their memories completely disappear, the ocean will sink into the abyss forever, and the world will meet its end. Once this barrier completely collapses, the entire AIOS realm will sink into the abyss, all humans will lose their connection to the ocean, and it will become a lifeless wasteland.</p>
-                <p id="origin-desc3">Until a thousand years ago, an ancient prophecy foretold—when the memory fragments return to the temple, the goddesses sleeping in the sea will awaken once more, guiding the world toward true awakening. The only power that can restart this barrier is to gather all the goddesses' memories and restore their "Primordial Divine Forms."</p>
-            </div>
+    <!-- 衝浪板側邊欄 -->
+    <div class="surf-nav">
+        <div class="surf-trigger" onclick="toggleSurfNav()">
+            <i class="fas fa-surfing"></i>
         </div>
-
-        <!-- 游戏目的 -->
-        <div class="content" id="purpose">
-            <h2 id="purpose-title">Your Mission</h2>
-            <div class="feature-item">
-                <i class="fas fa-bullseye"></i>
-                <p id="purpose-desc">Help the reincarnated goddesses rebuild their shattered memories and recover their true identities. When all memories are restored, the lost 'Core of Divinity' will awaken, revealing the final truth about the AIOS realm.</p>
-            </div>
-        </div>
-
-        <!-- 游戏特色 -->
-        <div class="content" id="features">
-            <h2 id="features-title">Game Features</h2>
-            <div class="feature-list">
-                <div class="feature-item">
-                    <i class="fas fa-water"></i>
-                    <h3 id="feature1-title">Unique Goddesses</h3>
-                    <p id="feature1-desc">Collect different goddesses, each representing different aspects of the sea with their own stories and personalities.</p>
+        <div class="surf-panel">
+            <a href="https://apps.apple.com/app/id6745821288" class="nav-link-app" target="_blank">
+                <img src="https://raw.githubusercontent.com/Ans1lBBB/AIOS/main/AIOS_icon.png" alt="AIOS Realm">
+                <div class="app-info">
+                    <div class="app-name">AIOS Realm</div>
+                    <div class="app-download">
+                        <i class="fas fa-download"></i> <span id="sidebar-download1">Download App</span>
+                    </div>
                 </div>
-                <div class="feature-item">
-                    <i class="fas fa-paint-brush"></i>
-                    <h3 id="feature2-title">Beautiful Art Style</h3>
-                    <p id="feature2-desc">Enjoy vibrant beach visuals and relaxing wave sounds that create the perfect summer gaming atmosphere.</p>
+            </a>
+            <a href="https://apps.apple.com/app/id6740332215" class="nav-link-app" target="_blank">
+                <img src="https://raw.githubusercontent.com/Ans1lBBB/ProfitFairy/main/ProfitFairy_icon.png" alt="ProfitFairy">
+                <div class="app-info">
+                    <div class="app-name">ProfitFairy</div>
+                    <div class="app-download">
+                        <i class="fas fa-download"></i> <span id="sidebar-download2">Download App</span>
+                    </div>
                 </div>
-                <div class="feature-item">
-                    <i class="fas fa-chess"></i>
-                    <h3 id="feature3-title">Innovative Gameplay</h3>
-                    <p id="feature3-desc">Combine cross-sliding with memory matching mechanics to unlock new goddess cards and progress through the story.</p>
+            </a>
+            <a href="https://apps.apple.com/app/id6752606069" class="nav-link-app" target="_blank">
+                <img src="https://raw.githubusercontent.com/Ans1lBBB/RubyDays/main/RubyDays_icon.png" alt="RubyDays">
+                <div class="app-info">
+                    <div class="app-name">RubyDays</div>
+                    <div class="app-download">
+                        <i class="fas fa-download"></i> <span id="sidebar-download3">Download App</span>
+                    </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- 游戏教程 -->
-        <div class="content" id="tutorial">
-            <h2 id="tutorial-title">How to Play</h2>
-            <div class="tutorial-steps">
-                <div class="tutorial-step">
-                    <div class="step-number">1</div>
-                    <p id="step1">Swipe in four directions to gather water elements and unlock new goddess cards.</p>
-                </div>
-                <div class="tutorial-step">
-                    <div class="step-number">2</div>
-                    <p id="step2">Match identical memory fragments to merge them into complete memories.</p>
-                </div>
-                <div class="tutorial-step">
-                    <div class="step-number">3</div>
-                    <p id="step3">Complete memory sets to restore a goddess's true form and unlock her story.</p>
-                </div>
-                <div class="tutorial-step">
-                    <div class="step-number">4</div>
-                    <p id="step4">Discover special combinations to unlock hidden content and progress faster.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 隐私政策 -->
-        <div class="content" id="privacy" style="text-align: center;">
-            <h2><i class="fas fa-shield-alt"></i> <span id="privacy-title">Your Privacy Matters</span></h2>
-            <p id="privacy-desc">We care about your data security. Read how we protect your information.</p>
-            <a href="https://ans1lbbb.github.io/AIOS/privacy.html" class="privacy-btn" id="privacy-btn" target="_blank">Privacy Policy</a>
-        </div>
-
-        <!-- 联系区块 -->
-        <div class="content contact-section">
-            <i class="fas fa-life-ring contact-icon"></i>
-            <h2 id="contact-title">Need Help?</h2>
-            <p id="contact-desc">Our support team is ready to assist you with any questions!</p>
-            <button class="contact-btn" id="contact-btn" onclick="window.location.href='mailto:ans1l@icloud.com'">
-                <i class="fas fa-envelope"></i>
-                <span id="contact-btn-text">Contact Support</span>
-            </button>
+            </a>
         </div>
     </div>
 
-    <footer>
-        <center>
-            <p>© 2025 AIOS Realm | All Rights Reserved</p>
-        </center>
-    </footer>
-
-    <!-- 右下角冲浪板下载按钮 -->
-    <a href="https://apps.apple.com/app/id6745821288/" class="surf-board" target="_blank">
-        <i class="fas fa-download"></i>
-        <span id="download-text">Download Now</span>
-    </a>
-
     <script>
-        // 完整多语言支持
+        // 完整多語言支持
         const translations = {
             en: {
-                appTitle: "AIOS Realm",
-                subtitle: "Uncover the Mysteries of Ancient AIOS Sea",
-                welcomeTitle: "🏄♀️ Limited Time Offer!",
-                mainDescription: "Download now and get the exclusive 'Tide Arbiter Alyss' card for FREE! Begin your journey to restore the divine memories of AIOS Realmes in this unique puzzle adventure!",
-                goddessQuote: "\"The tide of fate never rests for anyone.\"",
-                goddessDesc: "Alyss, the Tide Arbiter, controlled the tides and fate, and due to her power threatening the ancient AIOS Sea's order, was sealed deep beneath the ocean. Her seal was not just a confinement but a protection to prevent her endless power from overwhelming the world.",
-                originTitle: "The AIOS Legend",
-                originDesc: "In the mythical AIOS realm, lost between legends and myths, existed goddesses who controlled the power of the ocean. They each represented different aspects of the sea—the morning tides, the azure abyss, the dreams of coral reefs, the waves of the night... They originally guarded the balance of the world, maintaining humanity's memories and hopes of the sea.",
-                originDesc2: "However, tens of thousands of years ago, a sudden calamity swept through the entire AIOS realm. The goddesses' divine forms shattered, their memories broken into countless glittering fragments scattered across the corners of the sea and temporal rifts. With their divine power collapsing, the divine realm gradually spiraled out of control. If they cannot be awakened before their memories completely disappear, the ocean will sink into the abyss forever, and the world will meet its end.",
-                originDesc3: "Until a thousand years ago, an ancient prophecy foretold—when the memory fragments return to the temple, the goddesses sleeping in the sea will awaken once more, guiding the world toward true awakening. The only power that can restart this barrier is to gather all the goddesses' memories and restore their \"Primordial Divine Forms.\"",
-                purposeTitle: "Your Mission",
-                purposeDesc: "Help the reincarnated goddesses rebuild their shattered memories and recover their true identities. When all memories are restored, the lost 'Core of Divinity' will awaken, revealing the final truth about the AIOS realm.",
-                featuresTitle: "Game Features",
-                feature1Title: "Unique Goddesses",
-                feature1Desc: "Collect different goddesses, each representing different aspects of the sea with their own stories and personalities.",
-                feature2Title: "Beautiful Art Style",
-                feature2Desc: "Enjoy vibrant beach visuals and relaxing wave sounds that create the perfect summer gaming atmosphere.",
-                feature3Title: "Innovative Gameplay",
-                feature3Desc: "Combine cross-sliding with memory matching mechanics to unlock new goddess cards and progress through the story.",
-                tutorialTitle: "How to Play",
-                step1: "Swipe in four directions to gather water elements and unlock new goddess cards.",
-                step2: "Match identical memory fragments to merge them into complete memories.",
-                step3: "Complete memory sets to restore a goddess's true form and unlock her story.",
-                step4: "Discover special combinations to unlock hidden content and progress faster.",
-                privacyTitle: "Your Privacy Matters",
-                privacyDesc: "We care about your data security. Read how we protect your information.",
-                privacyBtn: "Privacy Policy",
-                contactTitle: "Need Help?",
-                contactDesc: "Our support team is ready to assist you with any questions!",
-                contactBtnText: "Contact Support",
-                downloadText: "Download Now"
+                // 限時優惠橫幅
+                "promo-banner": "Limited Offer: Download now and get the exclusive 'Tide Arbiter Alyss' card for FREE!",
+                
+                // 卡牌贈送橫幅
+                "banner-title": "Download Now, Get Alyss Card FREE!",
+                "banner-subtitle": "New players receive the exclusive 'Tide Arbiter Alyss' card for FREE!",
+                "banner-note": "Start your journey to restore the divine memories of AIOS Realms!",
+                
+                // 卡牌贈送功能點
+                "banner-feature1": "Unique Goddess Card",
+                "banner-feature2": "Beginner Boost",
+                "banner-feature3": "Limited Time Only",
+                
+                // 導航欄
+                "nav-features": "Features",
+                "nav-story": "Story",
+                "nav-apps": "Other Apps",
+                "nav-contact": "Contact",
+                
+                // 英雄區域
+                "hero-title": "AIOS Realm",
+                "hero-subtitle": "Rebuild the memories of ocean goddesses<br>Uncover the mysteries of ancient AIOS Sea",
+                "download-btn": "Download Now",
+                "learn-more-btn": "Learn More Features",
+                
+                // 功能特色
+                "features-title": "Game Features",
+                "feature1-title": "Unique Goddesses",
+                "feature1-desc": "Collect different goddesses, each representing different aspects of the sea with their own stories and personalities.",
+                "feature2-title": "Beautiful Art Style",
+                "feature2-desc": "Enjoy vibrant beach visuals and relaxing wave sounds that create the perfect summer gaming atmosphere.",
+                "feature3-title": "Innovative Gameplay",
+                "feature3-desc": "Combine cross-sliding with memory matching mechanics to unlock new goddess cards and progress through the story.",
+                "feature4-title": "Ocean Adventure",
+                "feature4-desc": "Explore the mysterious AIOS Sea, uncover hidden secrets, and restore the divine memories of ocean goddesses.",
+                "feature5-title": "Memory Collection",
+                "feature5-desc": "Gather scattered memory fragments across the ocean and piece together the forgotten history of the goddesses.",
+                "feature6-title": "Privacy Protection",
+                "feature6-desc": "Your game data is stored only on your device. We value and protect your privacy and security.",
+                "privacy-link-text": "Privacy Policy",
+                
+                // 遊戲故事區
+                "story-title": "The AIOS Legend",
+                "story-description": "In the mythical AIOS realm, lost between legends and myths, existed goddesses who controlled the power of the ocean. They each represented different aspects of the sea—the morning tides, the azure abyss, the dreams of coral reefs, the waves of the night... They originally guarded the balance of the world, maintaining humanity's memories and hopes of the sea.",
+                "story-description2": "However, tens of thousands of years ago, a sudden calamity swept through the entire AIOS realm. The goddesses' divine forms shattered, their memories broken into countless glittering fragments scattered across the corners of the sea and temporal rifts. With their divine power collapsing, the divine realm gradually spiraled out of control. If they cannot be awakened before their memories completely disappear, the ocean will sink into the abyss forever, and the world will meet its end.",
+                "story-description3": "Until a thousand years ago, an ancient prophecy foretold—when the memory fragments return to the temple, the goddesses sleeping in the sea will awaken once more, guiding the world toward true awakening. The only power that can restart this barrier is to gather all the goddesses' memories and restore their \"Primordial Divine Forms.\"",
+                "disclaimer-title": "🌊 Your Mission:",
+                "disclaimer-text": "As the chosen \"Memory Traveler,\" you will embark on a journey to retrieve the goddesses' memories. Starting from the power of water droplets, gradually gather water to form the sea, reassemble the memory fragments of the goddesses, awaken their divine forms, and uncover the truth behind the AIOS Sea. Only then will the legendary \"Core of Divinity\" restart, and the world have hope for rebirth.",
+                
+                // 遊戲玩法區
+                "gameplay-title": "How to Play",
+                "gameplay1-title": "Swipe & Match",
+                "gameplay1-desc": "Swipe in four directions to gather water elements and match identical memory fragments to merge them into complete memories.",
+                "gameplay2-title": "Collect Goddesses",
+                "gameplay2-desc": "Complete memory sets to restore a goddess's true form and unlock her story. Each goddess has unique abilities and background.",
+                "gameplay3-title": "Explore the Sea",
+                "gameplay3-desc": "Navigate through different ocean zones, each with unique challenges and hidden memory fragments waiting to be discovered.",
+                "gameplay4-title": "Special Combinations",
+                "gameplay4-desc": "Discover special combinations to unlock hidden content and progress faster through the mystical AIOS realm.",
+                
+                // 免責聲明區域
+                "disclaimer-section-title": "Disclaimer",
+                "disclaimer-section-p1": "Dear player, to ensure you enjoy AIOS Realm properly, please read the following disclaimer carefully:",
+                "disclaimer-section-li1": "AIOS Realm is an entertainment game and does not provide any form of investment or financial advice",
+                "disclaimer-section-li2": "In-game purchases are optional and not required to enjoy the core gameplay experience",
+                "disclaimer-section-li3": "Please maintain a healthy balance between gaming and real-life activities",
+                "disclaimer-section-li4": "Game content is fictional and any resemblance to real persons or events is coincidental",
+                "disclaimer-section-li5": "We value your privacy, all game data is stored only on your device and will not be uploaded to servers",
+                "disclaimer-section-p2": "Using this game means you have read and agreed to the above disclaimer content. Wishing you an enjoyable gaming experience! 🌊",
+                
+                // 其他應用
+                "other-apps-title": "Other Selected Apps",
+                "app1-title": "ProfitFairy",
+                "app1-subtitle": "Profit Calculator",
+                "app1-description": "The ultimate tool designed for e-commerce sellers and entrepreneurs, accurately calculating costs, prices and profit margins in seconds. With intuitive interface and powerful features, it helps you make informed business decisions and maximize your profits. Perfect for small business owners, dropshippers, and anyone selling online.",
+                "app1-link": "Download App",
+                "app1-website": "Website",
+                "app2-title": "RubyDays",
+                "app2-subtitle": "Your Period Bestie",
+                "app2-description": "Royal-grade wellness wisdom, tailored for modern ladies. Pioneering integration of TCM classics essence, accurately corresponding to menstrual cycle phases. Track your cycle, receive personalized health insights, and discover ancient wellness practices adapted for contemporary life. Your companion for holistic feminine health and wellbeing.",
+                "app2-link": "Download App",
+                "app2-website": "Website",
+                
+                // 聯絡我們
+                "contact-title": "Contact Us",
+                "contact-subtitle": "Dear player, we are here to listen to your voice",
+                "contact-description": "Whether it's about your experience with AIOS Realm, feature ideas, or anything you'd like to share, we value and look forward to receiving your message. Click the button below to contact us via email～",
+                "contact-btn-text": "Send Email to Us",
+                
+                // 側邊欄
+                "sidebar-download1": "Download App",
+                "sidebar-download2": "Download App",
+                "sidebar-download3": "Download App",
+                
+                // 頁腳
+                "footer-text": "© 2025 AIOS Realm - Rebuild the memories of ocean goddesses<br>Uncover the mysteries of ancient AIOS Sea"
             },
             zh: {
-                appTitle: "AIOS女神",
-                subtitle: "探索上古时代艾奥斯海域的神秘真相",
-                welcomeTitle: "🏄♀️ 限时优惠！",
-                mainDescription: "立即下载即可免费获得「潮之律命者·艾莉瑟」限定卡！开始您重建艾奥斯女神记忆的独特解谜冒险！",
-                goddessQuote: "\"命运之潮，从未为谁停歇。\"",
-                goddessDesc: "艾莉瑟，掌控潮汐与命运的律命者，因其力量威胁了古老艾奥斯海域的秩序，被禁锢于深海封印。她的封印不只是束缚，更是守护，防止那无尽力量淹没世界。",
-                originTitle: "艾奥斯传说",
-                originDesc: "曾经在遗落于神话与传说之间的「艾奥斯海域」AIOS realm，存在着掌控海洋之力的女神。她们各自代表着不同的海洋面貌——清晨潮汐、蔚蓝深渊、珊瑚礁之梦、夜幕浪潮……她们原本守护着世界的平衡，维系着人们对海的记忆与希望。",
-                originDesc2: "然而，数万年前，一场突如其来的灾厄袭捲了整个艾奥斯海域。女神的神格破碎、记忆被敲碎，化为无数闪耀的碎片散落在海域中的各个角落与时裂缝中，神力崩塌使神界逐渐失控。若无法在记忆完全消失前唤醒她们，海洋将永沉深渊，世界也将走向终结。这个结界一旦完全崩毁，整个艾奥斯海域将永沉深渊，所有人类将失去与海洋的联系，变成一片死寂荒海。",
-                originDesc3: "直到千年前有一段古老的预言—当记忆碎片重返神殿，沉睡于海中的女神们将再次苏醒，指引世界迈向真正的觉醒。而唯一能重启这个结界的力量，就是集齐所有女神的记忆，让她们恢复「原始神格」。",
-                purposeTitle: "您的使命",
-                purposeDesc: "帮助转世女神们重建破碎的记忆，找回真实身份。当所有记忆恢复时，失落的'神之核心'将会苏醒，揭示关于艾奥斯领域的最终真相。",
-                featuresTitle: "游戏特色",
-                feature1Title: "独特女神角色",
-                feature1Desc: "收集不同的女神，每位都代表着海洋的不同面貌，拥有自己的故事和个性。",
-                feature2Title: "精美艺术风格",
-                feature2Desc: "享受充满活力的海滩视觉效果和轻松的海浪声，营造完美的夏日游戏氛围。",
-                feature3Title: "创新玩法",
-                feature3Desc: "结合十字滑动与记忆匹配机制，解锁新女神卡牌并推进故事发展。",
-                tutorialTitle: "游戏玩法",
-                step1: "向四个方向滑动收集水元素，解锁新女神卡牌。",
-                step2: "匹配相同的记忆碎片，将它们合并为完整记忆。",
-                step3: "完成记忆套装以恢复女神的真实形态并解锁她的故事。",
-                step4: "发现特殊组合以解锁隐藏内容并更快推进进度。",
-                privacyTitle: "隐私保护",
-                privacyDesc: "我们重视您的数据安全。了解我们如何保护您的信息。",
-                privacyBtn: "隐私政策",
-                contactTitle: "需要帮助？",
-                contactDesc: "我们的支持团队随时为您解答问题！",
-                contactBtnText: "联系支持",
-                downloadText: "立即下载"
+                "promo-banner": "限时优惠：立即下载即可免费获得「潮之律命者·艾莉瑟」限定卡！",
+                "banner-title": "立即下载，免费获得艾莉瑟卡牌！",
+                "banner-subtitle": "新玩家免费获得「潮之律命者·艾莉瑟」限定卡！",
+                "banner-note": "开始您重建艾奥斯女神记忆的独特解谜冒险！",
+                "banner-feature1": "独特女神卡牌",
+                "banner-feature2": "新手助力",
+                "banner-feature3": "限时赠送",
+                "nav-features": "功能特色",
+                "nav-story": "游戏故事",
+                "nav-apps": "其他应用",
+                "nav-contact": "联系我们",
+                "hero-title": "AIOS女神",
+                "hero-subtitle": "重建海洋女神的记忆<br>探索上古时代艾奥斯海域的神秘真相",
+                "download-btn": "立即下载",
+                "learn-more-btn": "了解更多功能",
+                "features-title": "游戏特色",
+                "feature1-title": "独特女神角色",
+                "feature1-desc": "收集不同的女神，每位都代表着海洋的不同面貌，拥有自己的故事和个性。",
+                "feature2-title": "精美艺术风格",
+                "feature2-desc": "享受充满活力的海滩视觉效果和轻松的海浪声，营造完美的夏日游戏氛围。",
+                "feature3-title": "创新玩法",
+                "feature3-desc": "结合十字滑动与记忆匹配机制，解锁新女神卡牌并推进故事发展。",
+                "feature4-title": "海洋冒险",
+                "feature4-desc": "探索神秘的艾奥斯海域，揭开隐藏的秘密，恢复海洋女神的记忆。",
+                "feature5-title": "记忆收集",
+                "feature5-desc": "收集散落在海洋中的记忆碎片，拼凑女神们被遗忘的历史。",
+                "feature6-title": "隐私保护",
+                "feature6-desc": "您的游戏数据仅存储于设备中。我们重视并保护您的隐私安全。",
+                "privacy-link-text": "隐私政策",
+                "story-title": "艾奥斯传说",
+                "story-description": "曾经在遗落于神话与传说之间的「艾奥斯海域」，存在着掌控海洋之力的女神。她们各自代表着不同的海洋面貌——清晨潮汐、蔚蓝深渊、珊瑚礁之梦、夜幕浪潮……她们原本守护着世界的平衡，维系着人们对海的记忆与希望。",
+                "story-description2": "然而，数万年前，一场突如其来的灾厄袭捲了整个艾奥斯海域。女神的神格破碎、记忆被敲碎，化为无数闪耀的碎片散落在海域中的各个角落与时裂缝中，神力崩塌使神界逐渐失控。若无法在记忆完全消失前唤醒她们，海洋将永沉深渊，世界也将走向终结。",
+                "story-description3": "直到千年前有一段古老的预言—当记忆碎片重返神殿，沉睡于海中的女神们将再次苏醒，指引世界迈向真正的觉醒。而唯一能重启这个结界的力量，就是集齐所有女神的记忆，让她们恢复「原始神格」。",
+                "disclaimer-title": "🌊 您的使命：",
+                "disclaimer-text": "你作为被选召的「记忆旅者」，踏上了寻回女神记忆的旅途将重組她们的记忆碎片，从水滴之力出发，逐步聚水成海，重組女神们的记忆碎片唤醒她们的神格，揭开艾奥斯海域背后的真相。传说中的「神之核心」才会再度啓动，世界才有重生的希望。",
+                "gameplay-title": "游戏玩法",
+                "gameplay1-title": "滑动与匹配",
+                "gameplay1-desc": "向四个方向滑动收集水元素，匹配相同的记忆碎片，将它们合并为完整记忆。",
+                "gameplay2-title": "收集女神",
+                "gameplay2-desc": "完成记忆套装以恢复女神的真实形态并解锁她的故事。每位女神都有独特的能力和背景。",
+                "gameplay3-title": "探索海洋",
+                "gameplay3-desc": "导航穿越不同的海洋区域，每个区域都有独特的挑战和等待发现的隐藏记忆碎片。",
+                "gameplay4-title": "特殊组合",
+                "gameplay4-desc": "发现特殊组合以解锁隐藏内容并更快推进神秘艾奥斯领域的进度。",
+                "disclaimer-section-title": "免责声明",
+                "disclaimer-section-p1": "亲爱的玩家，为了确保您能正确使用AIOS Realm，请仔细阅读以下免责声明：",
+                "disclaimer-section-li1": "AIOS Realm仅为娱乐游戏，不提供任何形式的投资或财务建议",
+                "disclaimer-section-li2": "游戏内购买是可选的，不是享受核心游戏体验所必需的",
+                "disclaimer-section-li3": "请保持游戏与现实生活活动的健康平衡",
+                "disclaimer-section-li4": "游戏内容是虚构的，与真实人物或事件的任何相似之处纯属巧合",
+                "disclaimer-section-li5": "我们重视您的隐私，所有游戏数据仅存储于您的设备中，不会上传至服务器",
+                "disclaimer-section-p2": "使用本游戏即表示您已阅读并同意以上免责声明内容。祝您游戏愉快！🌊",
+                "other-apps-title": "其他精选应用",
+                "app1-title": "ProfitFairy",
+                "app1-subtitle": "利润精算师",
+                "app1-description": "专为电商卖家与创业者设计的终极工具，一秒精準算出成本、售价与毛利率。拥有直观界面和强大功能，帮助您做出明智的商业决策并最大化利润。非常适合小型企业主、代发货商和任何在线销售的人士。",
+                "app1-link": "下载应用",
+                "app1-website": "官网介绍",
+                "app2-title": "小主日记",
+                "app2-subtitle": "生理期好闺蜜",
+                "app2-description": "宫廷级养生智慧，专为现代小主量身定制。首创融合中医典籍精髓，依生理周期精准对应。追踪您的周期，接收个性化健康见解，并发现适合当代生活的古老养生实践。您全面女性健康和福祉的伴侣。",
+                "app2-link": "下载应用",
+                "app2-website": "官网介绍",
+                "contact-title": "联系我们",
+                "contact-subtitle": "亲爱的玩家，我们在这里倾听您的声音",
+                "contact-description": "无论是对AIOS Realm的使用体验、功能想法，还是任何想要分享的点点滴滴，我们都非常重视并期待收到您的讯息。点击下方按钮即可透过邮件与我们联络～",
+                "contact-btn-text": "传送邮件给我们",
+                "sidebar-download1": "下载应用",
+                "sidebar-download2": "下载应用",
+                "sidebar-download3": "下载应用",
+                "footer-text": "© 2025 AIOS女神 - 重建海洋女神的记忆<br>探索上古时代艾奥斯海域的神秘真相"
             },
             zh_tw: {
-                appTitle: "AIOS女神",
-                subtitle: "探索上古時代艾奧斯海域的神秘真相",
-                welcomeTitle: "🏄♀️ 限時優惠！",
-                mainDescription: "立即下載即可免費獲得「潮之律命者・艾莉瑟」限定卡！開始您重建艾奧斯女神記憶的獨特解謎冒險！",
-                goddessQuote: "\"命運之潮，從未為誰停歇。\"",
-                goddessDesc: "艾莉瑟，掌控潮汐與命運的律命者，因其力量威脅了古老艾奧斯海域的秩序，被禁錮於深海封印。她的封印不只是束縛，更是守護，防止那無盡力量淹沒世界。",
-                originTitle: "艾奧斯傳說",
-                originDesc: "曾經在遺落於神話與傳說之間的「艾奧斯海域」AIOS realm，存在著掌控海洋之力的女神。她們各自代表著不同的海洋面貌——清晨潮汐、蔚藍深淵、珊瑚礁之夢、夜幕浪潮……她們原本守護著世界的平衡，維繫著人們對海的記憶與希望。",
-                originDesc2: "然而，數萬年前，一場突如其來的災厄襲捲了整個艾奧斯海域。女神的神格破碎、記憶被敲碎，化為無數閃耀的碎片散落在海域中的各個角落與時空裂縫中，神力崩塌使神界逐漸失控。若無法在記憶完全消失前喚醒她們，海洋將永沉深淵，世界也將走向終結。這個結界一旦完全崩毀，整個艾奧斯海域將永沉深淵，所有人類將失去與海洋的聯繫，變成一片死寂荒海。",
-                originDesc3: "直到千年前有一段古老的預言—當記憶碎片重返神殿，沉睡於海中的女神們將再次甦醒，指引世界邁向真正的覺醒。而唯一能重啟這個結界的力量，就是集齊所有女神的記憶，讓她們恢復「原始神格」。",
-                purposeTitle: "您的使命",
-                purposeDesc: "幫助轉世女神們重建破碎的記憶，找回真實身份。當所有記憶恢復時，失落的「神之核心」將會甦醒，揭示關於艾奧斯領域的最終真相。",
-                featuresTitle: "遊戲特色",
-                feature1Title: "獨特女神角色",
-                feature1Desc: "收集不同的女神，每位都代表著海洋的不同面貌，擁有自己的故事和個性。",
-                feature2Title: "精美藝術風格",
-                feature2Desc: "享受充滿活力的海灘視覺效果和輕鬆的海浪聲，營造完美的夏日遊戲氛圍。",
-                feature3Title: "創新玩法",
-                feature3Desc: "結合十字滑動與記憶匹配機制，解鎖新女神卡牌並推進故事發展。",
-                tutorialTitle: "遊戲玩法",
-                step1: "向四個方向滑動收集水元素，解鎖新女神卡牌。",
-                step2: "匹配相同的記憶碎片，將它們合併為完整記憶。",
-                step3: "完成記憶套裝以恢復女神的真實形態並解鎖她的故事。",
-                step4: "發現特殊組合以解鎖隱藏內容並更快推進進度。",
-                privacyTitle: "隱私保護",
-                privacyDesc: "我們重視您的數據安全。了解我們如何保護您的信息。",
-                privacyBtn: "隱私政策",
-                contactTitle: "需要幫助？",
-                contactDesc: "我們的支持團隊隨時為您解答問題！",
-                contactBtnText: "聯繫支持",
-                downloadText: "立即下載"
+                "promo-banner": "限時優惠：立即下載即可免費獲得「潮之律命者・艾莉瑟」限定卡！",
+                "banner-title": "立即下載，免費獲得艾莉瑟卡牌！",
+                "banner-subtitle": "新玩家免費獲得「潮之律命者・艾莉瑟」限定卡！",
+                "banner-note": "開始您重建艾奧斯女神記憶的獨特解謎冒險！",
+                "banner-feature1": "獨特女神卡牌",
+                "banner-feature2": "新手助力",
+                "banner-feature3": "限時贈送",
+                "nav-features": "功能特色",
+                "nav-story": "遊戲故事",
+                "nav-apps": "其他應用",
+                "nav-contact": "聯絡我們",
+                "hero-title": "AIOS女神",
+                "hero-subtitle": "重建海洋女神的記憶<br>探索上古時代艾奧斯海域的神秘真相",
+                "download-btn": "立即下載",
+                "learn-more-btn": "了解更多功能",
+                "features-title": "遊戲特色",
+                "feature1-title": "獨特女神角色",
+                "feature1-desc": "收集不同的女神，每位都代表著海洋的不同面貌，擁有自己的故事和個性。",
+                "feature2-title": "精美藝術風格",
+                "feature2-desc": "享受充滿活力的海灘視覺效果和輕鬆的海浪聲，營造完美的夏日遊戲氛圍。",
+                "feature3-title": "創新玩法",
+                "feature3-desc": "結合十字滑動與記憶匹配機制，解鎖新女神卡牌並推進故事發展。",
+                "feature4-title": "海洋冒險",
+                "feature4-desc": "探索神秘的艾奧斯海域，揭開隱藏的秘密，恢復海洋女神的記憶。",
+                "feature5-title": "記憶收集",
+                "feature5-desc": "收集散落在海洋中的記憶碎片，拼湊女神們被遺忘的歷史。",
+                "feature6-title": "隱私保護",
+                "feature6-desc": "您的遊戲數據僅存儲於設備中。我們重視並保護您的隱私安全。",
+                "privacy-link-text": "隱私政策",
+                "story-title": "艾奧斯傳說",
+                "story-description": "曾經在遺落於神話與傳說之間的「艾奧斯海域」，存在著掌控海洋之力的女神。她們各自代表著不同的海洋面貌——清晨潮汐、蔚藍深淵、珊瑚礁之夢、夜幕浪潮……她們原本守護著世界的平衡，維繫著人們對海的記憶與希望。",
+                "story-description2": "然而，數萬年前，一場突如其來的災厄襲捲了整個艾奧斯海域。女神的神格破碎、記憶被敲碎，化為無數閃耀的碎片散落在海域中的各個角落與時空裂縫中，神力崩塌使神界逐漸失控。若無法在記憶完全消失前喚醒她們，海洋將永沉深淵，世界也將走向終結。",
+                "story-description3": "直到千年前有一段古老的預言—當記憶碎片重返神殿，沉睡於海中的女神們將再次甦醒，指引世界邁向真正的覺醒。而唯一能重啟這個結界的力量，就是集齊所有女神的記憶，讓她們恢復「原始神格」。",
+                "disclaimer-title": "🌊 您的使命：",
+                "disclaimer-text": "你作為被選召的「記憶旅者」，踏上了尋回女神記憶的旅途將重組她們的記憶碎片，從水滴之力出發，逐步聚水成海，重組女神們的記憶碎片喚醒她們的神格，揭開艾奧斯海域背後的真相。傳說中的「神之核心」才會再度啓動，世界才有重生的希望。",
+                "gameplay-title": "遊戲玩法",
+                "gameplay1-title": "滑動與匹配",
+                "gameplay1-desc": "向四個方向滑動收集水元素，匹配相同的記憶碎片，將它們合併為完整記憶。",
+                "gameplay2-title": "收集女神",
+                "gameplay2-desc": "完成記憶套裝以恢復女神的真實形態並解鎖她的故事。每位女神都有獨特的能力和背景。",
+                "gameplay3-title": "探索海洋",
+                "gameplay3-desc": "導航穿越不同的海洋區域，每個區域都有獨特的挑戰和等待發現的隱藏記憶碎片。",
+                "gameplay4-title": "特殊組合",
+                "gameplay4-desc": "發現特殊組合以解鎖隱藏內容並更快推進神秘艾奧斯領域的進度。",
+                "disclaimer-section-title": "免責聲明",
+                "disclaimer-section-p1": "親愛的玩家，為了確保您能正確使用AIOS Realm，請仔細閱讀以下免責聲明：",
+                "disclaimer-section-li1": "AIOS Realm僅為娛樂遊戲，不提供任何形式的投資或財務建議",
+                "disclaimer-section-li2": "遊戲內購買是可選的，不是享受核心遊戲體驗所必需的",
+                "disclaimer-section-li3": "請保持遊戲與現實生活活動的健康平衡",
+                "disclaimer-section-li4": "遊戲內容是虛構的，與真實人物或事件的任何相似之處純屬巧合",
+                "disclaimer-section-li5": "我們重視您的隱私，所有遊戲數據僅存儲於您的設備中，不會上傳至伺服器",
+                "disclaimer-section-p2": "使用本遊戲即表示您已閱讀並同意以上免責聲明內容。祝您遊戲愉快！🌊",
+                "other-apps-title": "其他精選應用",
+                "app1-title": "ProfitFairy",
+                "app1-subtitle": "利潤精算師",
+                "app1-description": "專為電商賣家與創業者設計的終極工具，一秒精準算出成本、售價與毛利率。擁有直觀界面和強大功能，幫助您做出明智的商業決策並最大化利潤。非常適合小型企業主、代發貨商和任何在線銷售的人士。",
+                "app1-link": "下載應用",
+                "app1-website": "官網介紹",
+                "app2-title": "小主日記",
+                "app2-subtitle": "生理期好閨蜜",
+                "app2-description": "宮廷級養生智慧，專為現代小主量身訂制。首創融合中醫典籍精髓，依生理週期精準對應。追蹤您的週期，接收個性化健康見解，並發現適合當代生活的古老養生實踐。您全面女性健康和福祉的伴侶。",
+                "app2-link": "下載應用",
+                "app2-website": "官網介紹",
+                "contact-title": "聯絡我們",
+                "contact-subtitle": "親愛的玩家，我們在這裡傾聽您的聲音",
+                "contact-description": "無論是對AIOS Realm的使用體驗、功能想法，還是任何想要分享的點點滴滴，我們都非常重視並期待收到您的訊息。點擊下方按鈕即可透過郵件與我們聯絡～",
+                "contact-btn-text": "傳送郵件給我們",
+                "sidebar-download1": "下載應用",
+                "sidebar-download2": "下載應用",
+                "sidebar-download3": "下載應用",
+                "footer-text": "© 2025 AIOS女神 - 重建海洋女神的記憶<br>探索上古時代艾奧斯海域的神秘真相"
             },
             ja: {
-                appTitle: "AIOS女神",
-                subtitle: "古代AIOS海域の神秘的な真実を探る",
-                welcomeTitle: "🏄♀️ 期間限定キャンペーン！",
-                mainDescription: "今すぐダウンロードで、限定「潮の律命者アリス」カードを無料ゲット！AIOSの女神たちの記憶を再構築するユニークなパズルアドベンチャーを始めよう！",
-                goddessQuote: "\"運命の潮は、誰のためにも止まらない。\"",
-                goddessDesc: "アリスは潮と運命を司る律命者であり、その力が古代AIOS海の秩序を脅かしたため、深海に封印された。彼女の封印は単なる拘束ではなく、無限の力が世界を飲み込むのを防ぐ守護であった。",
-                originTitle: "AIOSの伝説",
-                originDesc: "神話と伝説の間に失われた「AIOS海域」には、海の力を制御する女神たちが存在していました。彼女たちはそれぞれ朝の潮、紺碧の深淵、珊瑚礁の夢、夜の波など、海の異なる側面を表していました...彼女たちはもともと世界のバランスを守り、人類の海への記憶と希望を維持していました。",
-                originDesc2: "しかし、数万年前、突然の災厄がAIOS海域全体を襲いました。女神たちの神格は砕け散り、記憶は無数の輝く断片に砕かれ、海の隅々や時間の裂け目に散らばりました。神の力が崩壊するにつれ、神界は次第に制御不能になりました。記憶が完全に消える前に彼女たちを目覚めさせることができなければ、海は永遠に深淵に沈み、世界は終焉を迎えるでしょう。この結界が完全に崩壊すれば、AIOS海域全体が深淵に沈み、すべての人間は海とのつながりを失い、死んだ荒海と化すでしょう。",
-                originDesc3: "千年前、古代の予言がありました—記憶の断片が神殿に戻るとき、海に眠る女神たちが再び目覚め、世界を真の覚醒へと導くでしょう。この結界を再起動できる唯一の力は、すべての女神の記憶を集め、彼女たちの「原初神格」を回復させることです。",
-                purposeTitle: "あなたの使命",
-                purposeDesc: "転生した女神たちが砕けた記憶を再構築し、真の姿を取り戻すのを助けてください。全ての記憶が回復した時、失われた「神の核」が目覚め、AIOS領域に関する最終的な真実が明らかになります。",
-                featuresTitle: "ゲームの特徴",
-                feature1Title: "ユニークな女神たち",
-                feature1Desc: "異なる女神を集めましょう。それぞれが海の異なる側面を表し、独自の物語と個性を持っています。",
-                feature2Title: "美しいアートスタイル",
-                feature2Desc: "鮮やかなビーチのビジュアルとリラックスできる波の音で、完璧な夏のゲーム雰囲気をお楽しみください。",
-                feature3Title: "革新的なゲームプレイ",
-                feature3Desc: "十字スライドと記憶マッチングメカニズムを組み合わせ、新しい女神カードをアンロックして物語を進めましょう。",
-                tutorialTitle: "遊び方",
-                step1: "4方向にスワイプして水の要素を集め、新しい女神カードをアンロックします。",
-                step2: "同じ記憶の断片をマッチングさせ、完全な記憶に統合します。",
-                step3: "記憶セットを完成させて女神の真の姿を復元し、彼女の物語をアンロックします。",
-                step4: "特別な組み合わせを発見して隠しコンテンツをアンロックし、より速く進捗しましょう。",
-                privacyTitle: "プライバシー保護",
-                privacyDesc: "私たちはあなたのデータセキュリティを重視しています。情報保護の方法をご確認ください。",
-                privacyBtn: "プライバシーポリシー",
-                contactTitle: "お問い合わせ",
-                contactDesc: "私たちのサポートチームがいつでも質問にお答えします！",
-                contactBtnText: "サポートに連絡",
-                downloadText: "今すぐダウンロード"
+                "promo-banner": "期間限定：今すぐダウンロードで限定「潮の律命者アリス」カードを無料ゲット！",
+                "banner-title": "今すぐダウンロード、アリスカードを無料ゲット！",
+                "banner-subtitle": "新規プレイヤーは限定「潮の律命者アリス」カードを無料で獲得！",
+                "banner-note": "AIOSの女神たちの記憶を再構築するユニークなパズルアドベンチャーを始めよう！",
+                "banner-feature1": "ユニークな女神カード",
+                "banner-feature2": "初心者ブースト",
+                "banner-feature3": "期間限定",
+                "nav-features": "機能特徴",
+                "nav-story": "ゲームストーリー",
+                "nav-apps": "他のアプリ",
+                "nav-contact": "お問い合わせ",
+                "hero-title": "AIOS女神",
+                "hero-subtitle": "海の女神の記憶を再構築する<br>古代AIOS海域の神秘的な真実を探る",
+                "download-btn": "今すぐダウンロード",
+                "learn-more-btn": "機能詳細を見る",
+                "features-title": "ゲームの特徴",
+                "feature1-title": "ユニークな女神たち",
+                "feature1-desc": "異なる女神を集めましょう。それぞれが海の異なる側面を表し、独自の物語と個性を持っています。",
+                "feature2-title": "美しいアートスタイル",
+                "feature2-desc": "鮮やかなビーチのビジュアルとリラックスできる波の音で、完璧な夏のゲーム雰囲気をお楽しみください。",
+                "feature3-title": "革新的なゲームプレイ",
+                "feature3-desc": "十字スライドと記憶マッチングメカニズムを組み合わせ、新しい女神カードをアンロックして物語を進めましょう。",
+                "feature4-title": "海の冒険",
+                "feature4-desc": "神秘的なAIOS海を探索し、隠された秘密を明らかにし、海の女神の記憶を回復します。",
+                "feature5-title": "記憶コレクション",
+                "feature5-desc": "海に散らばった記憶の断片を集め、女神たちの忘れられた歴史を組み立てます。",
+                "feature6-title": "プライバシー保護",
+                "feature6-desc": "あなたのゲームデータはデバイス内のみに保存されます。私たちはあなたのプライバシーと安全を重視し保護します。",
+                "privacy-link-text": "プライバシーポリシー",
+                "story-title": "AIOSの伝説",
+                "story-description": "神話と伝説の間に失われた「AIOS海域」には、海の力を制御する女神たちが存在していました。彼女たちはそれぞれ朝の潮、紺碧の深淵、珊瑚礁の夢、夜の波など、海の異なる側面を表していました...彼女たちはもともと世界のバランスを守り、人類の海への記憶と希望を維持していました。",
+                "story-description2": "しかし、数万年前、突然の災厄がAIOS海域全体を襲いました。女神たちの神格は砕け散り、記憶は無数の輝く断片に砕かれ、海の隅々や時間の裂け目に散らばりました。神の力が崩壊するにつれ、神界は次第に制御不能になりました。記憶が完全に消える前に彼女たちを目覚めさせることができなければ、海は永遠に深淵に沈み、世界は終焉を迎えるでしょう。",
+                "story-description3": "千年前、古代の予言がありました—記憶の断片が神殿に戻るとき、海に眠る女神たちが再び目覚め、世界を真の覚醒へと導くでしょう。この結界を再起動できる唯一の力は、すべての女神の記憶を集め、彼女たちの「原初神格」を回復させることです。",
+                "disclaimer-title": "🌊 あなたの使命：",
+                "disclaimer-text": "選ばれた「記憶の旅人」として、あなたは女神たちの記憶を取り戻す旅に出ます。水滴の力から始まり、徐々に水を集めて海を形成し、女神たちの記憶の断片を再組み立てて彼女たちの神格を目覚めさせ、AIOS海の背後にある真実を明らかにします。伝説の「神の核」が再起動するときのみ、世界は再生の希望を持つでしょう。",
+                "gameplay-title": "遊び方",
+                "gameplay1-title": "スワイプ＆マッチ",
+                "gameplay1-desc": "4方向にスワイプして水の要素を集め、同じ記憶の断片をマッチングさせ、完全な記憶に統合します。",
+                "gameplay2-title": "女神を集める",
+                "gameplay2-desc": "記憶セットを完成させて女神の真の姿を復元し、彼女の物語をアンロックします。各女神は独自の能力と背景を持っています。",
+                "gameplay3-title": "海を探索",
+                "gameplay3-desc": "異なる海洋ゾーンをナビゲートし、各ゾーンには独自の挑戦と発見を待つ隠された記憶の断片があります。",
+                "gameplay4-title": "特別な組み合わせ",
+                "gameplay4-desc": "特別な組み合わせを発見して隠しコンテンツをアンロックし、神秘的なAIOS領域をより速く進捗しましょう。",
+                "disclaimer-section-title": "免責事項",
+                "disclaimer-section-p1": "親愛なるプレイヤーの皆様、AIOS Realmを正しくお楽しみいただくために、以下の免責事項をよくお読みください：",
+                "disclaimer-section-li1": "AIOS Realmは娯楽ゲームであり、いかなる形式の投資や財務アドバイスも提供しません",
+                "disclaimer-section-li2": "ゲーム内購入はオプションであり、コアゲームプレイ体験を楽しむために必須ではありません",
+                "disclaimer-section-li3": "ゲームと現実生活活動の健全なバランスを保ってください",
+                "disclaimer-section-li4": "ゲーム内容はフィクションであり、実在の人物や事件との類似点は偶然です",
+                "disclaimer-section-li5": "私たちはあなたのプライバシーを重視し、すべてのゲームデータはあなたのデバイス内にのみ保存され、サーバーにアップロードされることはありません",
+                "disclaimer-section-p2": "本ゲームを使用することは、上記の免責事項内容を読み同意したことを意味します。ご利用をお楽しみください！🌊",
+                "other-apps-title": "他の精選アプリ",
+                "app1-title": "ProfitFairy",
+                "app1-subtitle": "利益計算士",
+                "app1-description": "EC売り手と起業家のために設計された究極のツールで、コスト、価格、利益率を1秒で正確に計算します。直感的なインターフェースと強力な機能で、情報に基づいたビジネス上の決定を下し、利益を最大化するのに役立ちます。中小企業の所有者、ドロップシッパー、オンラインで販売するすべての人に最適です。",
+                "app1-link": "アプリをダウンロード",
+                "app1-website": "公式サイト",
+                "app2-title": "姫様ダイアリー",
+                "app2-subtitle": "生理の親友",
+                "app2-description": "宮廷級の養生智慧、現代の姫様のために量身定制。中医典籍の精髓を融合した初の試みで、月経周期に精密に対応。あなたの周期を追跡し、個別化された健康インサイトを受け取り、現代生活に適応した古代の健康実践を発見しましょう。ホリスティックな女性の健康とウェルビーイングのためのあなたの相棒です。",
+                "app2-link": "アプリをダウンロード",
+                "app2-website": "公式サイト",
+                "contact-title": "お問い合わせ",
+                "contact-subtitle": "親愛なるプレイヤーの皆様、私たちはあなたの声を聴くためにここにいます",
+                "contact-description": "AIOS Realmの使用体験、機能のアイデア、または共有したいことについて、私たちはあなたのメッセージを大切にし、受け取ることを楽しみにしています。以下のボタンをクリックしてメールでお問い合わせください～",
+                "contact-btn-text": "メールを送信",
+                "sidebar-download1": "アプリをダウンロード",
+                "sidebar-download2": "アプリをダウンロード",
+                "sidebar-download3": "アプリをダウンロード",
+                "footer-text": "© 2025 AIOS女神 - 海の女神の記憶を再構築する<br>古代AIOS海域の神秘的な真実を探る"
             },
             ko: {
-                appTitle: "AIOS 여신",
-                subtitle: "고대 AIOS 바다의 신비로운 진실 탐구",
-                welcomeTitle: "🏄♀️ 한정 기간 제공!",
-                mainDescription: "지금 다운로드하면 독점 '조류의 법칙자 알리스' 카드를 무료로 받을 수 있습니다! AIOS 여신들의 기억을 재건하는 독특한 퍼즐 어드벤처를 시작하세요!",
-                goddessQuote: "\"운명의 조수는 누구를 위해서도 멈추지 않는다.\"",
-                goddessDesc: "알리스는 조류와 운명을 다스리는 법칙자로, 그 힘이 고대 AIOS 바다의 질서를 위협했기 때문에 깊은 바다에 봉인되었다. 그녀의 봉인은 단순한 구속이 아니라 무한한 힘이 세상을 삼키는 것을 막는 수호였다.",
-                originTitle: "AIOS의 전설",
-                originDesc: "신화와 전설 사이에 잊혀진 'AIOS 해역'에는 바다의 힘을 통제하는 여신들이 존재했습니다. 그들은 각각 아침 조수, 푸른 심연, 산호초의 꿈, 밤의 파도 등 바다의 다른 측면을 나타냈습니다... 그들은 원래 세계의 균형을 지키며 인류의 바다에 대한 기억과 희망을 유지했습니다.",
-                originDesc2: "그러나 수만 년 전, 갑작스러운 재앙이 AIOS 해역 전체를 휩쓸었습니다. 여신들의 신격이 산산조각나고 기억은 무수히 반짝이는 조각으로 부서져 바다 구석구석과 시간의 균열 속에 흩어졌습니다. 신의 힘이 무너지면서 신계는 점차 통제를 벗어나기 시작했습니다. 기억이 완전히 사라지기 전에 그들을 깨울 수 없다면 바다는 영원히 심연으로 가라앉을 것이며 세계도 종말을 맞이할 것입니다. 이 결계가 완전히 붕괴되면 전체 AIOS 해역이 심연에 가라앉고 모든 인간은 바다와의 연결을 잃어 죽은 황폐한 바다가 될 것입니다.",
-                originDesc3: "천 년 전, 한 고대 예언이 있었습니다—기억 조각이 신전으로 돌아갈 때, 바다에 잠든 여신들이 다시 깨어나 세계를 진정한 각성으로 이끌 것이라고. 이 결계를 다시 시작할 수 있는 유일한 힘은 모든 여신의 기억을 모아 그들의 '원초 신격'을 회복시키는 것입니다.",
-                purposeTitle: "당신의 사명",
-                purposeDesc: "환생한 여신들이 산산조각난 기억을 재건하고 진정한 정체성을 회복할 수 있도록 도와주세요. 모든 기억이 회복되면 잃어버린 '신의 핵'이 깨어나 AIOS 영역에 관한 최종적인 진실이 드러날 것입니다.",
-                featuresTitle: "게임 특징",
-                feature1Title: "독특한 여신들",
-                feature1Desc: "다양한 여신들을 수집하세요. 각각 바다의 다른 측면을 나타내며 자신만의 이야기와 개성을 가지고 있습니다.",
-                feature2Title: "아름다운 아트 스타일",
-                feature2Desc: "생동감 넘치는 해변 비주얼과 편안한 파도 소리로 완벽한 여름 게임 분위기를 즐기세요.",
-                feature3Title: "혁신적인 게임플레이",
-                feature3Desc: "십자 슬라이딩과 기억 매칭 메커니즘을 결합해 새로운 여신 카드를 잠금 해제하고 이야기를 진행하세요.",
-                tutorialTitle: "게임 방법",
-                step1: "네 방향으로 스와이프하여 물 요소를 모으고 새로운 여신 카드를 잠금 해제하세요.",
-                step2: "동일한 기억 조각을 매칭시켜 완전한 기억으로 통합하세요.",
-                step3: "기억 세트를 완성하여 여신의 진정한 모습을 복원하고 그녀의 이야기를 잠금 해제하세요.",
-                step4: "특별한 조합을 발견하여 숨겨진 콘텐츠를 잠금 해제하고 더 빠르게 진행하세요.",
-                privacyTitle: "개인정보 보호",
-                privacyDesc: "우리는 귀하의 데이터 보안을 중요하게 생각합니다. 정보 보호 방법을 확인하세요.",
-                privacyBtn: "개인정보 보호정책",
-                contactTitle: "도움이 필요하세요?",
-                contactDesc: "우리의 지원 팀이 언제든지 질문에 답변해 드립니다!",
-                contactBtnText: "지원팀에 문의",
-                downloadText: "지금 다운로드"
+                "promo-banner": "한정 기간: 지금 다운로드하면 한정 '조류의 법칙자 알리스' 카드를 무료로 받을 수 있습니다!",
+                "banner-title": "지금 다운로드, 알리스 카드 무료 획득!",
+                "banner-subtitle": "신규 플레이어는 한정 '조류의 법칙자 알리스' 카드를 무료로 획득!",
+                "banner-note": "AIOS 여신들의 기억을 재건하는 독특한 퍼즐 어드벤처를 시작하세요!",
+                "banner-feature1": "독특한 여신 카드",
+                "banner-feature2": "초보자 부스트",
+                "banner-feature3": "한정 기간",
+                "nav-features": "기능 특징",
+                "nav-story": "게임 스토리",
+                "nav-apps": "다른 앱",
+                "nav-contact": "문의하기",
+                "hero-title": "AIOS 여신",
+                "hero-subtitle": "바다 여신의 기억을 재건하다<br>고대 AIOS 바다의 신비로운 진실 탐구",
+                "download-btn": "지금 다운로드",
+                "learn-more-btn": "기능 더 알아보기",
+                "features-title": "게임 특징",
+                "feature1-title": "독특한 여신들",
+                "feature1-desc": "다양한 여신들을 수집하세요. 각각 바다의 다른 측면을 나타내며 자신만의 이야기와 개성을 가지고 있습니다.",
+                "feature2-title": "아름다운 아트 스타일",
+                "feature2-desc": "생동감 넘치는 해변 비주얼과 편안한 파도 소리로 완벽한 여름 게임 분위기를 즐기세요.",
+                "feature3-title": "혁신적인 게임플레이",
+                "feature3-desc": "십자 슬라이딩과 기억 매칭 메커니즘을 결합해 새로운 여신 카드를 잠금 해제하고 이야기를 진행하세요.",
+                "feature4-title": "바다 모험",
+                "feature4-desc": "신비로운 AIOS 바다를 탐험하고 숨겨진 비밀을 밝히며 바다 여신의 기억을 회복합니다.",
+                "feature5-title": "기억 수집",
+                "feature5-desc": "바다에 흩어져 있는 기억 조각을 모아 여신들의 잊혀진 역사를 맞춥니다.",
+                "feature6-title": "개인정보 보호",
+                "feature6-desc": "여러분의 게임 데이터는 기기 내에만 저장됩니다. 우리는 여러분의 개인정보와 안전을 소중히 여기며 보호합니다.",
+                "privacy-link-text": "개인정보 보호정책",
+                "story-title": "AIOS의 전설",
+                "story-description": "신화와 전설 사이에 잊혀진 'AIOS 해역'에는 바다의 힘을 통제하는 여신들이 존재했습니다. 그들은 각각 아침 조수, 푸른 심연, 산호초의 꿈, 밤의 파도 등 바다의 다른 측면을 나타냈습니다... 그들은 원래 세계의 균형을 지키며 인류의 바다에 대한 기억과 희망을 유지했습니다.",
+                "story-description2": "그러나 수만 년 전, 갑작스러운 재앙이 AIOS 해역 전체를 휩쓸었습니다. 여신들의 신격이 산산조각나고 기억은 무수히 반짝이는 조각으로 부서져 바다 구석구석과 시간의 균열 속에 흩어졌습니다. 신의 힘이 무너지면서 신계는 점차 통제를 벗어나기 시작했습니다. 기억이 완전히 사라지기 전에 그들을 깨울 수 없다면 바다는 영원히 심연으로 가라앉을 것이며 세계도 종말을 맞이할 것입니다.",
+                "story-description3": "천 년 전, 한 고대 예언이 있었습니다—기억 조각이 신전으로 돌아갈 때, 바다에 잠든 여신들이 다시 깨어나 세계를 진정한 각성으로 이끌 것이라고. 이 결계를 다시 시작할 수 있는 유일한 힘은 모든 여신의 기억을 모아 그들의 '원초 신격'을 회복시키는 것입니다.",
+                "disclaimer-title": "🌊 당신의 사명:",
+                "disclaimer-text": "선택된 '기억 여행자'로서, 당신은 여신들의 기억을 되찾는 여정을 시작합니다. 물방울의 힘에서 시작하여 점차 물을 모아 바다를 형성하고, 여신들의 기억 조각을 재조립하여 그들의 신격을 깨우고, AIOS 바다 뒤에 숨겨진 진실을 밝힙니다. 전설적인 '신의 핵'이 재시작될 때만 세계는 재생의 희망을 가질 것입니다.",
+                "gameplay-title": "게임 방법",
+                "gameplay1-title": "스와이프 & 매치",
+                "gameplay1-desc": "네 방향으로 스와이프하여 물 요소를 모으고 동일한 기억 조각을 매칭시켜 완전한 기억으로 통합하세요.",
+                "gameplay2-title": "여신 수집",
+                "gameplay2-desc": "기억 세트를 완성하여 여신의 진정한 모습을 복원하고 그녀의 이야기를 잠금 해제하세요. 각 여신은 고유한 능력과 배경을 가지고 있습니다.",
+                "gameplay3-title": "바다 탐험",
+                "gameplay3-desc": "다양한 해양 지역을 탐색하며 각 지역마다 고유한 도전과 발견을 기다리는 숨겨진 기억 조각이 있습니다.",
+                "gameplay4-title": "특별한 조합",
+                "gameplay4-desc": "특별한 조합을 발견하여 숨겨진 콘텐츠를 잠금 해제하고 신비로운 AIOS 영역을 더 빠르게 진행하세요.",
+                "disclaimer-section-title": "면책 조항",
+                "disclaimer-section-p1": "사랑하는 사용자 여러분, AIOS Realm을 올바르게 즐기기 위해 다음 면책 조항을 주의 깊게 읽어주세요:",
+                "disclaimer-section-li1": "AIOS Realm은 엔터테인먼트 게임이며 어떤 형태의 투자나 재무 조언도 제공하지 않습니다",
+                "disclaimer-section-li2": "게임 내 구매는 선택 사항이며 핵심 게임플레이 경험을 즐기기 위해 필수는 아닙니다",
+                "disclaimer-section-li3": "게임과 실제 생활 활동 사이의 건강한 균형을 유지하세요",
+                "disclaimer-section-li4": "게임 콘텐츠는 허구이며 실제 인물이나 사건과의 유사점은 우연의 일치입니다",
+                "disclaimer-section-li5": "우리는 여러분의 개인정보를 소중히 여기며 모든 게임 데이터는 여러분의 기기 내에만 저장되고 서버로 업로드되지 않습니다",
+                "disclaimer-section-p2": "본 게임을 사용함은 위의 면책 조항 내용을 읽고 동의한 것으로 간주됩니다. 즐거운 게임 되세요! 🌊",
+                "other-apps-title": "다른 추천 앱",
+                "app1-title": "ProfitFairy",
+                "app1-subtitle": "이익 정산사",
+                "app1-description": "이커머스 판매자와 창업자를 위해 설계된 궁극의 도구로 비용, 가격, 이익률을 1초 만에 정확하게 계산합니다. 직관적인 인터페이스와 강력한 기능으로 정보에 기반한 비즈니스 결정을 내리고 이익을 극대화하는 데 도움이 됩니다. 소규모 기업 소유자, 드롭쉬퍼 및 온라인에서 판매하는 모든 사람에게 완벽합니다.",
+                "app1-link": "앱 다운로드",
+                "app1-website": "공식 웹사이트",
+                "app2-title": "공주님 다이어리",
+                "app2-subtitle": "너의 생리기 절친",
+                "app2-description": "궁중급 양생 지혜, 현대 공주님을 위해量身定制。중의학 고전 정수를 융합한 최초의 시도로 생리 주기에 정밀하게 대응。당신의 주기를 추적하고 개인화된 건강 통찰력을 받으며 현대 생활에 적합한 고대 건강 실천법을 발견하세요. 전체론적인 여성 건강과 웰빙을 위한 당신의 동반자입니다.",
+                "app2-link": "앱 다운로드",
+                "app2-website": "공식 웹사이트",
+                "contact-title": "문의하기",
+                "contact-subtitle": "사랑하는 사용자 여러분, 우리는 여러분의 목소리를 듣기 위해 여기에 있습니다",
+                "contact-description": "AIOS Realm 사용 경험, 기능 아이디어, 또는 공유하고 싶은 어떤 것에 대해서도 우리는 여러분의 메시지를 소중히 여기며 기다리고 있습니다. 아래 버튼을 클릭하여 이메일로 문의해 주세요～",
+                "contact-btn-text": "이메일 보내기",
+                "sidebar-download1": "앱 다운로드",
+                "sidebar-download2": "앱 다운로드",
+                "sidebar-download3": "앱 다운로드",
+                "footer-text": "© 2025 AIOS 여신 - 바다 여신의 기억을 재건하다<br>고대 AIOS 바다의 신비로운 진실 탐구"
             }
         };
 
         function switchLanguage(lang) {
             const data = translations[lang];
-            if (!data) return;
-            
-            // Update all text elements
-            document.getElementById('app-title').textContent = data.appTitle;
-            document.getElementById('subtitle').textContent = data.subtitle;
-            document.getElementById('welcome-title').textContent = data.welcomeTitle;
-            document.getElementById('main-description').textContent = data.mainDescription;
-            document.getElementById('goddess-quote').textContent = data.goddessQuote;
-            document.getElementById('goddess-desc').textContent = data.goddessDesc;
-            document.getElementById('origin-title').textContent = data.originTitle;
-            document.getElementById('origin-desc').textContent = data.originDesc;
-            document.getElementById('origin-desc2').textContent = data.originDesc2;
-            document.getElementById('origin-desc3').textContent = data.originDesc3;
-            document.getElementById('purpose-title').textContent = data.purposeTitle;
-            document.getElementById('purpose-desc').textContent = data.purposeDesc;
-            document.getElementById('features-title').textContent = data.featuresTitle;
-            document.getElementById('feature1-title').textContent = data.feature1Title;
-            document.getElementById('feature1-desc').textContent = data.feature1Desc;
-            document.getElementById('feature2-title').textContent = data.feature2Title;
-            document.getElementById('feature2-desc').textContent = data.feature2Desc;
-            document.getElementById('feature3-title').textContent = data.feature3Title;
-            document.getElementById('feature3-desc').textContent = data.feature3Desc;
-            document.getElementById('tutorial-title').textContent = data.tutorialTitle;
-            document.getElementById('step1').textContent = data.step1;
-            document.getElementById('step2').textContent = data.step2;
-            document.getElementById('step3').textContent = data.step3;
-            document.getElementById('step4').textContent = data.step4;
-            document.getElementById('privacy-title').textContent = data.privacyTitle;
-            document.getElementById('privacy-desc').textContent = data.privacyDesc;
-            document.getElementById('privacy-btn').textContent = data.privacyBtn;
-            document.getElementById('contact-title').textContent = data.contactTitle;
-            document.getElementById('contact-desc').textContent = data.contactDesc;
-            document.getElementById('contact-btn-text').textContent = data.contactBtnText;
-            document.getElementById('download-text').textContent = data.downloadText;
+
+            // 更新按鈕活躍狀態
+            document.querySelectorAll('.lang-btn').forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 更新所有文本內容
+            Object.keys(data).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.innerHTML = data[key];
+                }
+            });
+
+            // 更新html lang屬性
+            document.documentElement.lang = lang;
         }
 
-        // Initialize default language to English
+        // 切換衝浪導航可見性
+        function toggleSurfNav() {
+            document.querySelector('.surf-nav').classList.toggle('active');
+        }
+
+        // 初始化為英文
         document.addEventListener('DOMContentLoaded', () => {
-        switchLanguage('zh_tw');  // 改為繁體中文
+            switchLanguage('en');
+            
+            // 導航連結點擊效果
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function() {
+                    document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
         });
     </script>
 </body>
